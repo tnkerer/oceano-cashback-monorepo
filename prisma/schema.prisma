@@ -1,0 +1,46 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Proposal {
+  id                  String    @id @default(uuid())
+  title               String    
+  proposal            Int       @unique
+  tags                Tags[]
+  description         String
+  contract            String
+  creator             String
+  created             String
+  opens               String
+  closes              String
+  toll                Float
+  urls                String[]
+  files               String[]
+  options             Options[]
+  burnPercentage      Float
+  burnAddress         String
+  communityPercentage Float
+  communityAddress    String
+  uniqueHash          String
+}
+
+enum Tags {
+  CORE
+  TREASURY
+  URGENT
+  XDC_COMMUNITY
+}
+
+enum Options {
+  YES
+  NO
+  ABSTAIN
+}
