@@ -42,3 +42,7 @@ startDatabase.sh
 # Lock Files
 package-lock.json
 yarn.lock
+
+# Dockerfiles
+Dockerfile
+.dockerignore
