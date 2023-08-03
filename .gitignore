@@ -47,3 +47,6 @@ yarn.lock
 Dockerfile
 .dockerignore
 docker-commands.md
+
+#Prisma
+/prisma/migrations
