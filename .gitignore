@@ -46,3 +46,4 @@ yarn.lock
 # Dockerfiles
 Dockerfile
 .dockerignore
+docker-commands.md

@@ -10,37 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Proposal {
-  id                  String    @id @default(uuid())
-  title               String    
-  proposal            Int       @unique
-  tags                Tags[]
-  description         String
-  contract            String
-  creator             String
-  created             String
-  opens               String
-  closes              String
-  toll                Float
-  urls                String[]
-  files               String[]
-  options             Options[]
-  burnPercentage      Float
-  burnAddress         String
-  communityPercentage Float
-  communityAddress    String
-  uniqueHash          String
+model User {
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  roles    Roles[]  @default([USER])
+  balance  Int      @default(0)
+//  Asset    Asset[]
 }
 
-enum Tags {
-  CORE
-  TREASURY
-  URGENT
-  XDC_COMMUNITY
+// model Asset {
+//   id            String  @id @default(uuid())
+//   name          String
+//   address_id    String  @unique
+//   user          User    @relation(fields: [userId], references: [id])
+//   userId        String
+// }
+
+model Product {
+  id            String  @id @default(uuid())
+  name          String
+  fixedprice    Boolean @default(true)
+  price         Int
+  description   String
+  image         String
+  stock         Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  // user          User    @relation(fields: [userId], references: [id])
+  // userId        String
 }
 
-enum Options {
-  YES
-  NO
-  ABSTAIN
+enum Roles {
+  ADMIN
+  USER
 }
