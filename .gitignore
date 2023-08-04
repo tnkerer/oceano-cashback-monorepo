@@ -47,6 +47,10 @@ yarn.lock
 Dockerfile
 .dockerignore
 docker-commands.md
+startDatabase_template.sh
 
 #Prisma
 /prisma/migrations
+
+#Utils
+decrypt.js

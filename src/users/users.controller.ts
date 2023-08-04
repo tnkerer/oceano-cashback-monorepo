@@ -22,4 +22,5 @@ export class UsersController {
   findAll() {
     return this.userService.findAll();
   }
+  
 }

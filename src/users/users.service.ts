@@ -4,11 +4,14 @@ import {
   Injectable,
   NotFoundException,
   UnauthorizedException,
+  BadRequestException,  
 } from '@nestjs/common';
 import { PasswordService } from 'src/auth/services/password.service';
+import { WalletService } from 'src/auth/services/eth-wallet.service';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
+import Wallet from 'ethereumjs-wallet'
 
 @Injectable()
 export class UsersService {
@@ -16,6 +19,8 @@ export class UsersService {
     public readonly prismaService: PrismaService,
     @Inject(forwardRef(() => PasswordService))
     private passwordService: PasswordService,
+    @Inject(forwardRef(() => WalletService))
+    private walletService: WalletService,
   ) {}
 
   async create(data: CreateUserDto) {
@@ -23,14 +28,28 @@ export class UsersService {
       data.password,
     );
 
+    const wallet = Wallet.generate();
+    const encryptedKey = await this.walletService.hashPrivateKey(
+      wallet.getPrivateKeyString(),
+    );
+
     if (data.roles?.includes('ADMIN')) {
       throw new UnauthorizedException();
     }
 
-    const { password, ...user } = await this.prismaService.user.create({
+    if (encryptedKey === null) {
+      throw new BadRequestException('Unable to create wallet', {
+        cause: new Error(),
+        description: 'Unable to encrypt private key',
+      });
+    }
+
+    const { password, pkey, ewallet, ...user } = await this.prismaService.user.create({
       data: {
         ...data,
         password: encryptedPassword,
+        pkey: encryptedKey,
+        ewallet: wallet.getAddressString(),
       },
     });
     return user;

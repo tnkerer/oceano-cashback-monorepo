@@ -8,6 +8,8 @@ import { AuthService } from './services/auth.service';
 import { PasswordService } from './services/password.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
+import Wallet from 'ethereumjs-wallet';
+import { WalletService } from './services/eth-wallet.service';
 
 @Module({
   imports: [
@@ -21,10 +23,11 @@ import { LocalStrategy } from './strategies/local.strategy';
   providers: [
     AuthService,
     PasswordService,
+    WalletService,
     LocalStrategy,
     JwtStrategy,
     { provide: APP_GUARD, useClass: JwtAuthGuard },
   ],
-  exports: [AuthService, PasswordService],
+  exports: [AuthService, PasswordService, WalletService],
 })
 export class AuthModule {}
