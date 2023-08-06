@@ -6,6 +6,6 @@ export class ProductDto {
     description: string;
     image: string;
     stock: number;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt?: Date;
+    updatedAt?: Date;
 }

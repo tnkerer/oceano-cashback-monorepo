@@ -19,6 +19,7 @@ model User {
   balance  Int      @default(0)
   pkey     String
   ewallet  String
+  orders   Order[]
 //  Asset    Asset[]
 }
 
@@ -40,8 +41,20 @@ model Product {
   stock         Int
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+  orders   Order[]
   // user          User    @relation(fields: [userId], references: [id])
   // userId        String
+}
+
+model Order {
+  id            String  @id @default(uuid())
+  user          User    @relation(fields: [userId], references: [id])
+  userId        String
+  product       Product @relation(fields: [productId], references: [id])
+  productId     String
+  quantity      Int
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 enum Roles {

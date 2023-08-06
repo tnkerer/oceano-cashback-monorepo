@@ -12,6 +12,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
 import Wallet from 'ethereumjs-wallet'
+import { AddBalanceDto } from './dto/add-balance.dto';
 
 @Injectable()
 export class UsersService {
@@ -61,13 +62,44 @@ export class UsersService {
     });
 
     if (!user) {
-      throw new NotFoundException();
+      throw new NotFoundException('Target user not found in the database');
     }
 
     return user;
   }
 
+  async addBalance(data: AddBalanceDto) {
+    
+    const { email, amount } = data;
+    const user = await this.findByEmail(email);
+
+    if (user.balance + amount < 0) {
+      throw new BadRequestException('Balance cannot be negative');
+    }
+    
+    const { password, pkey, ewallet, ...updatedUser} = await this.prismaService.user.update({
+      where: { email },
+      data: {
+        balance: user.balance + amount,
+      },
+    });
+
+    return updatedUser;
+  }
+
   async findAll() {
     return this.prismaService.user.findMany();
+  }
+
+  async findById(id: string): Promise<UserDto | undefined> {
+    const { pkey, ewallet, ...user } = await this.prismaService.user.findFirst({
+      where: { id },
+    });
+
+    if (!user) {
+      throw new NotFoundException();
+    }
+
+    return user;
   }
 }
