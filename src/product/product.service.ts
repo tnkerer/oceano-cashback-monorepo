@@ -52,6 +52,7 @@ export class ProductService {
         const products = await this.prismaService.product.findMany({
             where: {
                 OR: [
+                    { id : { contains: query } },
                     { name: { contains: query } },
                     { description: { contains: query } },
                 ],

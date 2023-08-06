@@ -13,6 +13,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
 import Wallet from 'ethereumjs-wallet'
 import { AddBalanceDto } from './dto/add-balance.dto';
+import { BlockchainService } from 'src/blockchain/services/blockchain.service';
 
 @Injectable()
 export class UsersService {
@@ -22,6 +23,7 @@ export class UsersService {
     private passwordService: PasswordService,
     @Inject(forwardRef(() => WalletService))
     private walletService: WalletService,
+    private readonly blockchainService: BlockchainService,
   ) {}
 
   async create(data: CreateUserDto) {
@@ -76,6 +78,9 @@ export class UsersService {
     if (user.balance + amount < 0) {
       throw new BadRequestException('Balance cannot be negative');
     }
+
+    const { wallet, BalanceHub, Sal } = await this.blockchainService.initializeOpetator();
+    await this.blockchainService.addBalanceToHub(wallet, BalanceHub, Sal, amount, user.ewallet);
     
     const { password, pkey, ewallet, ...updatedUser} = await this.prismaService.user.update({
       where: { email },
@@ -92,7 +97,7 @@ export class UsersService {
   }
 
   async findById(id: string): Promise<UserDto | undefined> {
-    const { pkey, ewallet, ...user } = await this.prismaService.user.findFirst({
+    const { pkey, password, ...user } = await this.prismaService.user.findFirst({
       where: { id },
     });
 

@@ -1,10 +1,13 @@
 import { Injectable, BadRequestException, NotFoundException} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { BlockchainService } from '../blockchain/services/blockchain.service';
 import { OrderDto } from './dto/order.dto';
 
 @Injectable()
 export class CheckoutService {
-    constructor ( public readonly prismaService: PrismaService ) {}
+    constructor ( 
+        public readonly prismaService: PrismaService,
+        private readonly blockchainService: BlockchainService, ) {}
 
     async createOrder ( id: string, data: OrderDto ) {
         // OrderDto has a UserDto and ProductDto[] as properties
@@ -78,6 +81,48 @@ export class CheckoutService {
             }
         }
 
+        const { wallet, BalanceHub, Sal } = await this.blockchainService.initializeOpetator();
+
+        // do a withdrawFromHub and if it fails, we should revert the changes made to the database
+
+        try {
+            await this.blockchainService.withdrawFromHub(wallet, BalanceHub, orderPrice, user.ewallet);
+        } catch (error) {
+            
+            for(let i = 0; i < data.productsIds.length; i++) {
+                    
+                    const product = await this.prismaService.product.findUnique({
+                        where: {
+                            id: data.productsIds[i],
+                        },
+                    });
+        
+                    const updatedProduct = await this.prismaService.product.update({
+                        where: {
+                            id: data.productsIds[i],
+                        },
+                        data: {
+                            stock: product.stock + data.productsTotals[i],
+                        },
+                    });
+        
+                    if(!updatedProduct) {
+                        throw new BadRequestException(`Unable to update product stock!`);
+                    }
+
+                    const { password, pkey, ewallet, ...updatedUser} = await this.prismaService.user.update({
+                        where: {
+                            id: id,
+                        },
+                        data: {
+                            balance: user.balance + orderPrice,
+                        },
+                    });
+            }
+
+            throw new BadRequestException(`Unable to withdraw from hub!`);
+        }
+
         // Create order object on the database
         for(let i = 0; i < data.productsIds.length; i++) {
 
@@ -95,5 +140,41 @@ export class CheckoutService {
         }
 
         return updatedUser;
+    }
+
+    async findAllOrdersByUser ( id: string ) {
+            
+            const user = await this.prismaService.user.findUnique({
+                where: {
+                    id: id,
+                },
+            });
+    
+            if(!user) {
+                throw new NotFoundException(`Unable to find user!`);
+            }
+    
+            const orders = await this.prismaService.order.findMany({
+                where: {
+                    userId: id,
+                },
+            });
+    
+            if(!orders) {
+                throw new NotFoundException(`Unable to find orders!`);
+            }
+    
+            return orders;
+        }
+
+    async findAllOrders () {
+
+        const orders = await this.prismaService.order.findMany();
+
+        if(!orders) {
+            throw new NotFoundException(`Unable to find orders!`);
+        }
+
+        return orders;
     }
 }
