@@ -25,7 +25,7 @@ contract DeepDiveHub is Ownable, ReentrancyGuard {
     }
 
     // Function to deposit tokens into the vault
-    function deposit(uint256 amount, address grantee) external nonReentrant {
+    function deposit(uint256 amount, address grantee) external onlyOwner nonReentrant {
         require(amount > 0, "Amount should be greater than zero");
         require(token.transferFrom(msg.sender, address(this), amount), "Token transfer failed");
         balances[grantee] += amount;
@@ -34,7 +34,7 @@ contract DeepDiveHub is Ownable, ReentrancyGuard {
 
     // withraw should be callable only if the contract owner has enabled the withdraw feature
     function withdraw(uint256 amount) external nonReentrant {
-        require(withdrawEnabled, "Withdraw is not enabled")
+        require(withdrawEnabled, "Withdraw is not enabled");
         require(amount > 0, "Amount should be greater than zero");
         require(balances[msg.sender] >= amount, "Insufficient balance");
 
