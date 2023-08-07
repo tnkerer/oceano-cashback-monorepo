@@ -26,6 +26,7 @@
     "@nestjs/jwt": "^10.1.0",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^7.1.6",
     "@openzeppelin/contracts": "^4.9.3",
     "@prisma/client": "^4.7.1",
     "@truffle/hdwallet-provider": "^2.1.13",
@@ -41,6 +42,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "swagger-ui-express": "^5.0.0",
     "truffle-plugin-verify": "^0.6.4",
     "web3": "^1.8.2"
   },

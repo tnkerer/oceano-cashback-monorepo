@@ -23,6 +23,16 @@ export class ProductService {
     }
 
     async updateProduct (data: UpdateProductDto ) {
+
+        const productExists = await this.prismaService.product.findUnique({
+            where: {
+                id: data.id,
+            },
+        });
+
+        if(!productExists) {
+            throw new NotFoundException(`Unable to find product with id: ${data.id}`);
+        }
         
         const product = await this.prismaService.product.update({
             where: {

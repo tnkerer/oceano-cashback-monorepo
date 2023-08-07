@@ -10,6 +10,8 @@ import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 contract DeepDiveHub is Ownable, ReentrancyGuard {
     IERC20 public token;
 
+    // Add a boolean variable to track whether the contract is paused
+    bool public withdrawEnabled = false;
     mapping(address => uint256) public balances;
 
     // Add indexed events for deposit, withdraw and admin withdraw
@@ -30,8 +32,9 @@ contract DeepDiveHub is Ownable, ReentrancyGuard {
         emit Deposit(grantee, amount);
     }
 
-    // Function to withdraw tokens from the vault
+    // withraw should be callable only if the contract owner has enabled the withdraw feature
     function withdraw(uint256 amount) external nonReentrant {
+        require(withdrawEnabled, "Withdraw is not enabled")
         require(amount > 0, "Amount should be greater than zero");
         require(balances[msg.sender] >= amount, "Insufficient balance");
 
@@ -52,5 +55,15 @@ contract DeepDiveHub is Ownable, ReentrancyGuard {
     // Function to check the balance of a given address
     function getBalance(address account) external view returns (uint256) {
         return balances[account];
+    }
+
+    // Function to enable withdraw
+    function enableWithdraw() external onlyOwner {
+        withdrawEnabled = true;
+    }
+
+    // Function to disable withdraw
+    function disableWithdraw() external onlyOwner {
+        withdrawEnabled = false;
     }
 }

@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
   UnauthorizedException,
-  BadRequestException,  
+  BadRequestException,
 } from '@nestjs/common';
 import { PasswordService } from 'src/auth/services/password.service';
 import { WalletService } from 'src/auth/services/eth-wallet.service';
@@ -14,6 +14,9 @@ import { UserDto } from './dto/user.dto';
 import Wallet from 'ethereumjs-wallet'
 import { AddBalanceDto } from './dto/add-balance.dto';
 import { BlockchainService } from 'src/blockchain/services/blockchain.service';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { ChangePasswordDto } from './dto/change-password.dto';
+import { AuthService } from 'src/auth/services/auth.service';
 
 @Injectable()
 export class UsersService {
@@ -24,7 +27,7 @@ export class UsersService {
     @Inject(forwardRef(() => WalletService))
     private walletService: WalletService,
     private readonly blockchainService: BlockchainService,
-  ) {}
+  ) { }
 
   async create(data: CreateUserDto) {
     const encryptedPassword = await this.passwordService.hashPassword(
@@ -47,6 +50,14 @@ export class UsersService {
       });
     }
 
+    const isUser = await this.prismaService.user.findFirst({
+      where: { email: data.email },
+    });
+
+    if (isUser) {
+      throw new BadRequestException('User already exists');
+    }
+
     const { password, pkey, ewallet, ...user } = await this.prismaService.user.create({
       data: {
         ...data,
@@ -55,6 +66,7 @@ export class UsersService {
         ewallet: wallet.getAddressString(),
       },
     });
+
     return user;
   }
 
@@ -71,7 +83,7 @@ export class UsersService {
   }
 
   async addBalance(data: AddBalanceDto) {
-    
+
     const { email, amount } = data;
     const user = await this.findByEmail(email);
 
@@ -81,8 +93,8 @@ export class UsersService {
 
     const { wallet, BalanceHub, Sal } = await this.blockchainService.initializeOpetator();
     await this.blockchainService.addBalanceToHub(wallet, BalanceHub, Sal, amount, user.ewallet);
-    
-    const { password, pkey, ewallet, ...updatedUser} = await this.prismaService.user.update({
+
+    const { password, pkey, ewallet, ...updatedUser } = await this.prismaService.user.update({
       where: { email },
       data: {
         balance: user.balance + amount,
@@ -107,4 +119,46 @@ export class UsersService {
 
     return user;
   }
+
+  async updateUser(id: string, data: UpdateUserDto) {
+
+    try {
+      const { password, pkey, ewallet, ...user } = await this.prismaService.user.update({
+        where: { id },
+        data,
+      });
+
+      return user;
+    } catch (error) {
+      throw new BadRequestException('Unable to update user: Email already exists in the database');
+    }
+  }
+
+
+  async changePassword(id: string, data: ChangePasswordDto) {
+    const user = await this.prismaService.user.findFirst({
+      where: { id },
+    });
+
+    const isPassword = await this.passwordService.comparePassword(
+      data.oldPassword,
+      user.password,
+    );
+
+    if (user && isPassword) {
+      const encryptedPassword = await this.passwordService.hashPassword(
+        data.newPassword,
+      );
+      const { password, pkey, ...result } = await this.prismaService.user.update({
+        where: { id },
+        data: {
+          password: encryptedPassword,
+        },
+      });
+      return result;
+    } else {
+      throw new BadRequestException('Unable to change password: Old password might be incorrect or database is unavailable.');
+    }
+  }
+
 }

@@ -32,7 +32,7 @@ export class AuthService {
       sub: user.id,
       email: user.email,
       name: user.name,
-      wallets: user.wallets,
+      // wallets: user.wallets,
       roles: user.roles,
     };
 
