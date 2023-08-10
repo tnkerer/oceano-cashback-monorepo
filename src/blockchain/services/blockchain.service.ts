@@ -4,12 +4,9 @@ import { Injectable , BadRequestException } from "@nestjs/common";
 import { DeepDiveHub as HubAddress, Sal as SalAddress, RpcUrl } from "../constants";
 import { abi as HubAbi } from "../abis/DeepDiveHub.json";
 import { abi as SalAbi} from "../abis/Sal.json";
-import Web3 from 'web3';
-
 
 @Injectable()
 export class BlockchainService {
-    web3: Web3;
 
     async tryTransaction (transaction, attempts) {
         for (let i = 0; i < attempts; i++) {
@@ -57,7 +54,7 @@ export class BlockchainService {
             await this.tryTransaction(() =>
                 Sal
                     .connect(wallet)
-                    .approve(HubAddress["Networks"][chaindId], ethers.utils.parseEther(amount.toString()), { gasPrice: 30000000000, gasLimit: 5000000 }),
+                    .approve(HubAddress["Networks"][chaindId], ethers.utils.parseEther(amount.toString()), { gasPrice: process.env.BASE_GAS_PRICE, gasLimit: process.env.BASE_GAS_LIMIT }),
             2);
         } catch (err) {
             throw new BadRequestException("Unable to approve Sal" + err);
@@ -72,7 +69,7 @@ export class BlockchainService {
             await this.tryTransaction(() =>
                 BalanceHub
                     .connect(wallet)
-                    .deposit(ethers.utils.parseEther(amount.toString()), grantee, { gasPrice: 30000000000, gasLimit: 5000000 }),
+                    .deposit(ethers.utils.parseEther(amount.toString()), grantee, { gasPrice: process.env.BASE_GAS_PRICE, gasLimit: process.env.BASE_GAS_LIMIT }),
             2);
         } catch (err) {
             throw new BadRequestException("Unable to add balance to hub");
@@ -85,7 +82,7 @@ export class BlockchainService {
             await this.tryTransaction(() =>
                 BalanceHub
                     .connect(wallet)
-                    .withdrawToAdmin(ethers.utils.parseEther(amount.toString()), grantee, { gasPrice: 30000000000, gasLimit: 5000000 }),
+                    .withdrawToAdmin(ethers.utils.parseEther(amount.toString()), grantee, { gasPrice: process.env.BASE_GAS_PRICE, gasLimit: process.env.BASE_GAS_LIMIT }),
             2);
         } catch (err) {
             throw new BadRequestException("Unable to withdraw from hub");

@@ -8,15 +8,15 @@ import { AuthService } from './services/auth.service';
 import { PasswordService } from './services/password.service';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from './strategies/local.strategy';
-import Wallet from 'ethereumjs-wallet';
 import { WalletService } from './services/eth-wallet.service';
+require('dotenv').config();
 
 @Module({
   imports: [
     forwardRef(() => UsersModule),
     PassportModule,
     JwtModule.register({
-      secret: 'secret',
+      secret: process.env.MASTER_KEY,
       signOptions: { expiresIn: '86400s' },
     }),
   ],

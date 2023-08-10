@@ -16,6 +16,7 @@ contract DeepDiveHub is Ownable, ReentrancyGuard {
 
     // Add indexed events for deposit, withdraw and admin withdraw
 
+    event UserDeposit(address indexed grantee, uint256 amount);
     event Deposit(address indexed grantee, uint256 amount);
     event Withdraw(address indexed grantee, uint256 amount);
     event WithdrawToAdmin(address indexed grantee, uint256 amount);
@@ -24,7 +25,13 @@ contract DeepDiveHub is Ownable, ReentrancyGuard {
         token = IERC20(_tokenAddress);
     }
 
-    // Function to deposit tokens into the vault
+    function userDeposit(uint256 amount, address grantee) external nonReentrant {
+        require(amount > 0, "Amount should be greater than zero");
+        require(token.transferFrom(msg.sender, address(this), amount), "Token transfer failed");
+        balances[grantee] += amount;
+        emit UserDeposit(grantee, amount);
+    }
+
     function deposit(uint256 amount, address grantee) external onlyOwner nonReentrant {
         require(amount > 0, "Amount should be greater than zero");
         require(token.transferFrom(msg.sender, address(this), amount), "Token transfer failed");
