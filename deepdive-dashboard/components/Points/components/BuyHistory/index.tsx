@@ -51,10 +51,15 @@ const BuyHistory = () => {
             status: 'Concluído'
           }         
           orders.push(tempData)
-          // console.log(orders)
           const startIndex = (currentPage - 1) * itemsPerPage
           const endIndex = startIndex + itemsPerPage
-          setCurrentPageData(orders.slice(startIndex, endIndex))
+          const sortedOrders = orders.sort((a, b) => {
+            const dateTimeA = new Date(`${a.data} ${a.hora}`);
+            const dateTimeB = new Date(`${b.data} ${b.hora}`);
+            return dateTimeA.getTime() - dateTimeB.getTime();
+          })
+          console.log(sortedOrders)
+          setCurrentPageData(sortedOrders.slice(startIndex, endIndex))
           setTotalPages(Math.ceil(orders.length / itemsPerPage))
         })
       }
