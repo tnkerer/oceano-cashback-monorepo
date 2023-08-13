@@ -20,8 +20,11 @@ tasks:
       echo '📦 Installing Dependencies'
       npm install && npm run build
       cp .env.example .env
-      cd ../deepdive-dashboard
-      yarn install
+  - name: Dashboard Dependencies
+    before: cd deepdive-dashboard
+    init: |
+      echo '📦 Installing Dependencies'
+      npm install && npm run build
   - name: Docker Setup
     before: cd oceano-api
     command: |
@@ -45,8 +48,7 @@ tasks:
       head -n -1 .env.example > temp.env && mv temp.env .env.example
       echo API_URL=$(gp url 3001) >> .env.example
       gp preview $(gp url 3001)/swagger --external
-      yarn run build && yarn run start
-
+      npm run start
 ports:
   - port: 8080
     visibility: public
