@@ -36,19 +36,16 @@ tasks:
       gp sync-await "docker-up" && sleep 5s
       gp sync-done "server-api-up"
       npm run start:dev
-  - name: Open Browser
-    init: |
-      gp sync-await "server-api-up"
-      chmod +x open-swagger.sh
-    command: |
-      ./open-swagger.sh
   - name: Deep Dive Dashboard
     before: cd deepdive-dashboard
     command: |
       gp sync-await "server-api-up"
       head -n -1 .env.example > temp.env && mv temp.env .env.example
       echo API_URL=$(gp url 3001) >> .env.example
+      echo SWAGGER_URL=$(gp url 3001)/swagger >> .env.example
       cp .env.example .env
+      chmod +x open-swagger.sh
+      ./open-swagger.sh
       yarn run build && yarn run start
 
 ports:
