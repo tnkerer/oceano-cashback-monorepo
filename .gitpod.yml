@@ -38,6 +38,7 @@ tasks:
       npm run start:dev
   - name: Open Browser
     init: |
+      gp sync-await "server-api-up"
       chmod +x open-swagger.sh
     command: |
       ./open-swagger.sh
