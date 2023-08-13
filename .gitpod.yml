@@ -20,6 +20,8 @@ tasks:
       echo '📦 Installing Dependencies'
       npm install && npm run build
       cp .env.example .env
+      cd ../deepdive-dashboard
+      yarn install
   - name: Docker Setup
     before: cd oceano-api
     command: |
