@@ -21,7 +21,7 @@ tasks:
       npm install && npm run build
       cp .env.example .env
   - name: Docker Setup
-    before: cd backend
+    before: cd oceano-api
     command: |
       echo '🚀 Starting Docker - PostgreSQL - Adminer'
       docker-compose pull
