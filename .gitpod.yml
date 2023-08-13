@@ -19,7 +19,7 @@ tasks:
     init: |
       echo '📦 Installing Dependencies'
       npm install && npm run build
-      cp .env.template .env
+      cp .env.example .env
   - name: Docker Setup
     before: cd backend
     command: |
@@ -45,9 +45,9 @@ tasks:
     before: cd deepdive-dashboard
     command: |
       gp sync-await "server-api-up"
-      head -n -1 .env.template > temp.env && mv temp.env .env.template
-      echo API_URL=$(gp url 3001) >> .env.template
-      cp .env.template .env
+      head -n -1 .env.example > temp.env && mv temp.env .env.example
+      echo API_URL=$(gp url 3001) >> .env.example
+      cp .env.example .env
       yarn run build && yarn run start
 
 ports:
