@@ -58,7 +58,6 @@ const BuyHistory = () => {
             const dateTimeB = new Date(`${b.data} ${b.hora}`)
             return dateTimeA.getTime() - dateTimeB.getTime()
           })
-          console.log(sortedOrders)
           setCurrentPageData(sortedOrders.slice(startIndex, endIndex))
           setTotalPages(Math.ceil(orders.length / itemsPerPage))
         })

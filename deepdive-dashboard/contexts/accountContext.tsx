@@ -48,11 +48,12 @@ export const AccountProvider = ({ children }: any) => {
             return
         }
 
-        getUserData(process.env.API_URL).then((response) => {
+        await getUserData(process.env.API_URL).then((response) => {
+            // console.log(response.data.ewallet)
             setName(response.data.name);
             setEmail(response.data.email);
             setBalance(response.data.balance);
-            setWallet(response.data.wallet);
+            setWallet(response.data.ewallet);
         });
 
     };

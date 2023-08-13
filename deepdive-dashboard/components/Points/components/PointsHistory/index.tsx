@@ -10,6 +10,7 @@ import backarrow from '@/public/assets/pagination/backarrow.svg'
 import nextarrow from '@/public/assets/pagination/nextarrow.svg'
 import { AccountContext } from '@/contexts/accountContext'
 import { getPointsHistory } from '@/services/events'
+import { StatusContext } from '@/contexts/statusUpdater'
 
 const PointsHistory = () => {
   const [currentPage, setCurrentPage] = useState(1)
@@ -17,7 +18,8 @@ const PointsHistory = () => {
   const [totalPages, setTotalPages] = useState(1)
   const itemsPerPage = 8
 
-  const { data, setData } = useContext(AccountContext)
+  const { wallet, data, setData } = useContext(AccountContext)
+  const { statusUpdated, setStatusUpdated } = useContext(StatusContext)
 
   const DeepDiveHub = {
     80001: process.env.HUB_ADDRESS_MUMBAI,
@@ -29,11 +31,9 @@ const PointsHistory = () => {
     137: process.env.RPC_URL_POLYGON
   }
 
-  const { wallet } = useContext(AccountContext)
-
   useEffect(() => {
 
-    async function fetchData(wallet: string) {
+    async function fetchData() {
       if (process.env.CURRENT_CHAIN_ID === undefined || process.env.DEPLOYMENT_BLOCK === undefined) {
         console.log('Cant Reach API URL')
         return
@@ -54,7 +54,9 @@ const PointsHistory = () => {
         throw new Error('Deployment block is not a number')
       }
 
-      await getPointsHistory(wallet, rpcUrl, hubAddress, deploymentBlock).then((response) => {
+      // console.log(wallet)
+
+      getPointsHistory(wallet, rpcUrl, hubAddress, deploymentBlock).then((response) => {
         
         for (let i = 0; i < response.amounts.length; i++) {
           data.push({
@@ -66,9 +68,13 @@ const PointsHistory = () => {
           )
         }
         setTotalPages(Math.ceil(data.length / itemsPerPage))
+        setStatusUpdated(!statusUpdated)
       })
     }
-    fetchData(wallet)
+
+    if(wallet) {
+      fetchData()
+    }
   }, [wallet])
 
   const handleClickPrev = () => {
@@ -83,7 +89,7 @@ const PointsHistory = () => {
     const startIndex = ( currentPage - 1 ) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     setCurrentPageData(data.slice(startIndex, endIndex))
-  }, [currentPage, totalPages])
+  }, [currentPage, totalPages, statusUpdated])
 
   return (
     <div className={styles.container}>
