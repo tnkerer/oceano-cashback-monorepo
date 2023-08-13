@@ -44,10 +44,7 @@ tasks:
       gp sync-await "server-api-up"
       head -n -1 .env.example > temp.env && mv temp.env .env.example
       echo API_URL=$(gp url 3001) >> .env.example
-      echo SWAGGER_URL=$(gp url 3001)/swagger >> .env.example
-      cp .env.example .env
-      chmod +x open-swagger.sh
-      ./open-swagger.sh
+      gp preview $(gp url 3001)/swagger --external
       yarn run build && yarn run start
 
 ports:
