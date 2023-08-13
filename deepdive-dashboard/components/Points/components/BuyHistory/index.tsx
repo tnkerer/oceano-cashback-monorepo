@@ -54,9 +54,9 @@ const BuyHistory = () => {
           const startIndex = (currentPage - 1) * itemsPerPage
           const endIndex = startIndex + itemsPerPage
           const sortedOrders = orders.sort((a, b) => {
-            const dateTimeA = new Date(`${a.data} ${a.hora}`);
-            const dateTimeB = new Date(`${b.data} ${b.hora}`);
-            return dateTimeA.getTime() - dateTimeB.getTime();
+            const dateTimeA = new Date(`${a.data} ${a.hora}`)
+            const dateTimeB = new Date(`${b.data} ${b.hora}`)
+            return dateTimeA.getTime() - dateTimeB.getTime()
           })
           console.log(sortedOrders)
           setCurrentPageData(sortedOrders.slice(startIndex, endIndex))
