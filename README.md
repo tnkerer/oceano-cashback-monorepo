@@ -9,7 +9,7 @@
 <div align="center">
 
 [![License](https://img.shields.io/github/license/tnkerer/oceano-cashback-monorepo)](#license)
-<a href="https://github.com/tnkerer/oceano-cashback-monorepo" target="_blank">
+<a href="https://gitpod.io/#https://github.com/tnkerer/oceano-cashback-monorepo" target="_blank">
 <img src="https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod" alt="Gitpod">
 </a>
 </div>
