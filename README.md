@@ -1,12 +1,6 @@
 <!-- INTRODUCTION -->
 <br>
 <p align="center">
-  <a href="https://github.com/tnkerer/oceano-cashback-monorepo" target="_blank" rel="noopener noreferrer">
-    <img width="100" src="https://raw.githubusercontent.com/tnkerer/oceano-cashback-monorepo/main/deepdive-dashboard/public/assets/brand/bluelogo.svg" alt="Oceano Deep Dive">
-  </a>
-  
-  <!-- Title Placeholder -->
-  <h3 align="center">Oceano Deep Dive - Prova de Conceito</h3>
   <p align="center">
     Oceano Deep Dive é a prova de conceito de uma aplicação de pontos de Cashback tokenizados na rede Polygon. A idéia é a introdução de um token chamado SAL, que são ganhos no momento em que uma nova compra é efetuada na Plataforma Oceano, e pode ser usado pelo usuário em um Marketplace exclusivo.
   </p>
