@@ -30,7 +30,7 @@ tasks:
   - name: Start API Server
     before: cd oceano-api
     init: |
-      gp sync-await "docker-up" && sleep 45s
+      gp sync-await "docker-up" && sleep 60s
       npx prisma migrate dev
     command: |
       gp sync-await "docker-up" && sleep 5s
