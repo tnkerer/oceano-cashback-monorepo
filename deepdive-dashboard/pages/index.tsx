@@ -1,13 +1,15 @@
-import Preloader from '@/components/PreLoader'
-import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import Head from 'next/head'
+
+import LandingPage from '@/components/LandingPage'
+import Preloader from '@/components/PreLoader'
 
 export default function Home () {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     // eslint-disable-next-line semi
-    setTimeout(() => {setLoading(true); window.open('/login', '_self')}, 1700)
+    setTimeout(() => {setLoading(true)}, 1700)
   }, [])
 
   return (
@@ -22,6 +24,8 @@ export default function Home () {
       {!loading ? (
         <Preloader />
       ) : null}
+
+      <LandingPage />
     </>
   )
 }
