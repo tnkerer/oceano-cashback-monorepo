@@ -2,14 +2,18 @@ import Image from 'next/image'
 import NavbarLandingPage from './components/NavbarLandingPage'
 
 import styles from './styles.module.scss'
+import FAQCard from './components/FAQCard'
 
 import business1 from '@/public/assets/business/business1.svg'
 import business2 from '@/public/assets/business/business2.svg'
 import business3 from '@/public/assets/business/business3.svg'
 import business4 from '@/public/assets/business/business4.svg'
 import business5 from '@/public/assets/business/business5.svg'
-import rectangle from '@/public/assets/backgrounds/rectangle.svg'
 import blankphoto from '@/public/assets/images/blankphoto.svg'
+import thumb from '@/public/assets/icons/LP/thumb.svg'
+import calendary from '@/public/assets/icons/LP/calendary.svg'
+import trophy from '@/public/assets/icons/LP/trophy.svg'
+
 
 const LandingPage = () => {
   return (
@@ -19,7 +23,7 @@ const LandingPage = () => {
       </div>
 
       <div className={styles.contentContainer}>
-        <div className={styles.heroContainer}>
+        <div className={styles.heroSection}>
           <div />
 
           <div className={styles.centerContainer}>
@@ -83,11 +87,13 @@ const LandingPage = () => {
           </div>
 
           <div className={styles.rightSide}>
-            <Image src={rectangle} alt='Retângulo' />
+            <div className={styles.gift}>
+              <img width={1150} src='assets/backgrounds/gift.svg' alt='Retângulo' />
+            </div>
           </div>
         </div>
 
-        <div className={styles.benefitsContainer}>
+        <div className={styles.benefitsSection}>
     	    <div className={styles.headContainer}>
             <div className={styles.title}>
               Nossos benefícios
@@ -101,7 +107,7 @@ const LandingPage = () => {
           <div className={styles.cardContainer}>
             <div className={styles.card}>
               <div className={styles.iconContainer}>
-
+                <Image width={160} src={thumb} alt='Joinha' />
               </div>
 
               <div className={styles.title}>
@@ -119,7 +125,7 @@ const LandingPage = () => {
 
             <div className={styles.card}>
               <div className={styles.iconContainer}>
-
+                <Image width={160} src={calendary} alt='Calendário' />
               </div>
 
               <div className={styles.title}>
@@ -137,7 +143,7 @@ const LandingPage = () => {
 
             <div className={styles.card}>
               <div className={styles.iconContainer}>
-
+                <Image width={160} src={trophy} alt='Troféu' />
               </div>
 
               <div className={styles.title}>
@@ -155,7 +161,7 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className={styles.depositionsContainer}>
+        <div className={styles.depositionsSection}>
           <div className={styles.headContainer}>
             <div className={styles.title}>
               Nossos benefícios
@@ -334,6 +340,27 @@ const LandingPage = () => {
                 23, Abril - 8:13
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className={styles.faqSection}>
+          <div className={styles.headContainer}>
+            <div className={styles.title}>
+              Perguntas frequentes
+            </div>
+
+            <div className={styles.text}>
+              Lorem ipsum dolor sit amet. Sed officia accusamus ex sunt rerum eos tempora asperiores sed cupiditate ipsam aut nulla incidunt est quis dolores.
+            </div>
+          </div>
+
+          <div className={styles.faqContainer}>
+            <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
+            <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
+            <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
+            <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
+            <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
+            <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
           </div>
         </div>
       </div>
