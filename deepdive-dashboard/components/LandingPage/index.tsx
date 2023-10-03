@@ -1,8 +1,10 @@
 import Image from 'next/image'
-import NavbarLandingPage from './components/NavbarLandingPage'
 
 import styles from './styles.module.scss'
+
+import NavbarLandingPage from './components/NavbarLandingPage'
 import FAQCard from './components/FAQCard'
+import LPFooter from './components/LPFooter'
 
 import business1 from '@/public/assets/business/business1.svg'
 import business2 from '@/public/assets/business/business2.svg'
@@ -362,6 +364,10 @@ const LandingPage = () => {
             <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
             <FAQCard answer='Lorem LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' question='LoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLoremLorem' />
           </div>
+        </div>
+
+        <div className={styles.footerContainer}>
+          <LPFooter />
         </div>
       </div>
     </div>
