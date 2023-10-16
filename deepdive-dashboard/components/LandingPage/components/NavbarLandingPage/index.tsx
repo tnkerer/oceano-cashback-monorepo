@@ -29,9 +29,9 @@ const NavbarLandingPage = () => {
       </div>
 
       <div className={styles.loginContainer}>
-        <div className={styles.loginButton}>Login</div>
+        <div className={styles.loginButton} onClick={() => window.open('/login', '_self') }>Login</div>
 
-        <div className={styles.registerButton}>Crie sua conta</div>
+        <div className={styles.registerButton} onClick={() => window.open('/register', '_self')}>Crie sua conta</div>
       </div>
     </div>
   )

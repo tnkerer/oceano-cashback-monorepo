@@ -90,7 +90,7 @@ const LandingPage = () => {
 
           <div className={styles.rightSide}>
             <div className={styles.gift}>
-              <img width={1150} src='assets/backgrounds/gift.svg' alt='Retângulo' />
+              <img width={1010} src='assets/backgrounds/gift.svg' alt='Retângulo' />
             </div>
           </div>
         </div>
