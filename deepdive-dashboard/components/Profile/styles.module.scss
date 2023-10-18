@@ -1,11 +1,11 @@
 .container {
   // z-index: -;
   width: 100%;
-  height: 100vh;
   display: flex;
+  min-height: 100vh;
   flex-direction: column;
+  justify-content: space-between;
   margin: 0;
-  
 
   .navbarContainer {
     position: fixed;
@@ -18,13 +18,18 @@
     gap: 35px;
     padding: 140px 40px 40px 40px;
 
+    @media (max-height: 760px) {
+      padding: 122px 40px;
+    }
+
     .infoContainer {
-      width: 500px;
-      height: 520px;
+      max-width: 500px;
+      max-height: 520px;
       display: flex;
       flex-direction: column;
       gap: 20px;
-      padding: 40px;
+      border: solid;
+      padding: 20px;
       border: 1px solid #DBDBDB;
       border-radius: 6px;
 
@@ -151,5 +156,9 @@
         }
       }
     }
+  }
+
+  .footer {
+    
   }
 }
