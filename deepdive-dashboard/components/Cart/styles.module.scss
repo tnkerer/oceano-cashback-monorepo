@@ -3,9 +3,10 @@
   width: 100%;
   height: 100vh;
   display: flex;
+  left: 0;
 
   .fillContainer {
-    width: calc(100% - 400px);
+    width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.534);
     animation: openbgAnimation ease-in 0.5s;

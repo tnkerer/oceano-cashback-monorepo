@@ -1,11 +1,12 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
+import BuyPopup from '../BuyPopup'
+
 import styles from './styles.module.scss'
 
 import star from '@/public/assets/icons/star.svg'
-import cart from '@/public/assets/icons/cart.svg'
-import BuyPopup from '../BuyPopup'
+import like from '@/public/assets/icons/like.svg'
 
 interface CardData {
   id: string,
@@ -37,7 +38,7 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
         />
       }
 
-      <div className={styles.container}>
+      <div className={styles.container} onClick={() => setBuyPopup(true)}>
         <div className={styles.productImage}>
           <Image src={image} alt='Foto do produto' layout='responsive' width={259} height={233} />
         </div>
@@ -48,7 +49,7 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
           </div>
 
           <div className={styles.productInfo}>
-            <div className={styles.points}>
+            {/* <div className={styles.points}>
               <div className={styles.value}>
                 <span>{componentType == 'coupon' ? '$' : null}{value} {componentType == 'coupon' ? '-' : null} </span> {componentType == 'normal' ? 'SAL' : null}
               </div>
@@ -66,7 +67,7 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
                   }
                 </>
               }
-            </div>
+            </div> */}
 
             <div className={styles.description}>
               {description.slice(0, 80) + '...'}
@@ -83,8 +84,14 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
                 </div>
               </div>
 
-              <div className={styles.buy} onClick={() => setBuyPopup(true)}>
-                <Image src={cart} alt='Comprar' style={{marginLeft: '-2px'}} />
+              <div className={styles.right}>
+                <div className={styles.buy} onClick={() => setBuyPopup(true)}>
+                  {value}
+                </div>
+
+                <div className={styles.like}>
+                  <Image src={like} alt='Like' width={40} />
+                </div>
               </div>
             </div>
           </div>

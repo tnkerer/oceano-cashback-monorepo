@@ -1,20 +1,21 @@
 import Image from 'next/image'
 import { useEffect, useState, useContext, KeyboardEvent } from 'react'
 
+import Cart from '../Cart'
+
+import { AccountContext } from '@/contexts/accountContext'
+import { ProductsContext } from '@/contexts/productContext'
+import { CartContext } from '@/contexts/cartContext'
+
 import styles from './styles.module.scss'
 
-import logo from '@/public/assets/brand/whitelogo.svg'
 import magnifier from '@/public/assets/icons/magnifier.svg'
 import cart from '@/public/assets/icons/cart.svg'
 import profilephoto from '@/public/assets/images/profilephoto.svg'
 import profileicon from '@/public/assets/icons/profile.svg'
 import pointsicon from '@/public/assets/icons/points.svg'
 import logouticon from '@/public/assets/icons/logout.svg'
-import Cart from '../Cart'
-
-import { AccountContext } from '@/contexts/accountContext'
-import { ProductsContext } from '@/contexts/productContext'
-import { CartContext } from '@/contexts/cartContext'
+import bell from '@/public/assets/icons/bell.svg'
 
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('')
@@ -74,36 +75,9 @@ const Navbar = () => {
       }
 
       <div className={styles.container}>
-        <div className={styles.logo} onClick={() => { setSelectedOption('discounts'); window.open('/discounts', '_self') }}>
-          <Image src={logo} alt='Logo' />
-        </div>
-
-        <div className={styles.optionsContainer}>
-          <div
-            className={
-              selectedOption == 'discounts'
-                ? styles.selectedOption
-                : styles.option
-            }
-            onClick={() => { setSelectedOption('discounts'); window.open('/discounts', '_self') }}
-          >
-            Descontos
-          </div>
-
-          <div
-            className={
-              selectedOption == 'about' ? styles.selectedOption : styles.option
-            }
-            // eslint-disable-next-line semi
-            onClick={() => { setSelectedOption('about'); window.open('/about', '_self') }}
-          >
-            Sobre
-          </div>
-        </div>
-
         <div className={styles.searchBar}>
           <input type='text'
-            placeholder=" Pesquisar"
+            placeholder=" Pesquise o que você deseja!"
             onChange={(e) => setSearchText(e.target.value)}
             onKeyDown={handleEnterPress}
             className={styles.HTMLinput} />
@@ -114,6 +88,10 @@ const Navbar = () => {
         </div>
 
         <div className={styles.userContainer}>
+          <div className={styles.notifications}>
+            <Image src={bell} alt='Notificações' />
+          </div>
+
           <div className={styles.cart} onClick={() => { setCartOpen(!cartOpen); setDropdown(false) }}>
             <Image src={cart} alt='Cart' /> 
             {hasNotification ? <span className={styles.cartnotification}>{productsInCart}</span> : <span className={styles.nonotification}></span>}

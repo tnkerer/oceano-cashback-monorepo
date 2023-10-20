@@ -3,16 +3,17 @@ import Image from 'next/image';
 import { useContext, useEffect, useState } from 'react';
 
 import Navbar from '../Navbar';
-import Sidebar from './components/Sidebar';
 import CommerceCard from './components/CommerceCard';
-import Footer from '../Footer';
+import UserSidebar from '../UserSidebar';
+import MPFooter from './components/MPFooter';
 
 import styles from './styles.module.scss';
 
 import arrow from '@/public/assets/icons/downarrow.svg';
-import FilterLabel from './components/FilterLabel';
 import backarrow from '@/public/assets/pagination/backarrow.svg'
 import nextarrow from '@/public/assets/pagination/nextarrow.svg'
+import cleanfilter from '@/public/assets/icons/filter.svg'
+import downarrow from '@/public/assets/icons/filterarrow.svg'
 
 // import allCardsData from './data/productsData.json'
 import { ProductsContext } from '@/contexts/productContext';
@@ -93,109 +94,126 @@ const DiscountsPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.navbarContainer}>
-        <Navbar />
+      <div className={styles.sidebarContainer}>
+        <UserSidebar />
       </div>
 
       <div className={styles.contentContainer}>
-        <div className={styles.sidebarContainer}>
-          <Sidebar />
+        <div className={styles.navbarContainer}>
+          <Navbar />
         </div>
+        <div className={styles.separatorContainer}>
+          <div className={styles.commerceContainer}>
+            <div className={styles.searchContainer}>
+              <div className={styles.leftContainer}>
+                <div className={styles.filtersContainer}>
+                  <div className={styles.clean}>
+                    <Image src={cleanfilter} alt='Limpar' />
+                  </div>
 
-        <div className={styles.commerceContainer}>
-          <div className={styles.searchContainer}>
-            <div className={styles.leftContainer}>
-              <div className={styles.searchResult}>
-                <span>{searchNResults}</span> resultados para{' '}
-                <span>&quot;{userSearch}&quot;</span>
+                  <div className={styles.filter}>
+                    <div className={styles.text}>
+                      Categoria
+                    </div>
+
+                    <div className={styles.icon}>
+                      <Image src={downarrow} alt='Arrow' />
+                    </div>
+                  </div>
+
+                  <div className={styles.filter}>
+                    <div className={styles.text}>
+                      Preços
+                    </div>
+
+                    <div className={styles.icon}>
+                      <Image src={downarrow} alt='Arrow' />
+                    </div>
+                  </div>
+
+                  <div className={styles.filter}>
+                    <div className={styles.text}>
+                      Ofertas
+                    </div>
+
+                    <div className={styles.icon}>
+                      <Image src={downarrow} alt='Arrow' />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              <div className={styles.filtersContainer}>
-                <div className={styles.filters}>
-                  {cleanAllFilters == true ? null : (
-                    <>
-                      <FilterLabel placeholder='Filtro' />
-                      <FilterLabel placeholder='Filtro' />
-                      <FilterLabel placeholder='Filtro' />
-                      <FilterLabel placeholder='Filtro' />
-                      <FilterLabel placeholder='Filtro' />
-                    </>
+              <div className={styles.rightContainer}>
+                <div className={styles.orderBy}>
+                  <div className={styles.text}>Ordenar por</div>
+
+                  <div
+                    className={styles.orderDropdown}
+                    onClick={() => setOrderDropdown(!orderDropdown)}
+                  >
+                    <div className={styles.text}>{orderByState}</div>
+
+                    <div className={styles.arrow}>
+                      <Image src={arrow} alt='Ordenar por' />
+                    </div>
+                  </div>
+
+                  {orderDropdown && (
+                    <div className={styles.activeOrderDropdown}>
+                      <div className={styles.option}>Menor preço</div>
+
+                      <div className={styles.option}>Maior Preço</div>
+
+                      <div className={styles.option}>Em estoque</div>
+                    </div>
                   )}
                 </div>
-
-                <div
-                  className={styles.cleanFilters}
-                  onClick={() => setCleanAllFilters(true)}
-                >
-                  Limpar filtros
-                </div>
               </div>
             </div>
 
-            <div className={styles.rightContainer}>
-              <div className={styles.orderBy}>
-                <div className={styles.text}>Ordenar por</div>
+            <div className={styles.searchResult}>
+              <span>{searchNResults}</span> resultados para{' '}
+              <span>&quot;{userSearch}&quot;</span>
+            </div>
 
-                <div
-                  className={styles.orderDropdown}
-                  onClick={() => setOrderDropdown(!orderDropdown)}
-                >
-                  <div className={styles.text}>{orderByState}</div>
+            <div className={styles.widthLimiter}>
+              <div className={styles.commerce}>
+                {currentCardsData.map((cardData, index) => (
+                  <CommerceCard
+                    key={index}
+                    id={cardData.id}
+                    image={cardData.image}
+                    productName={cardData.productName}
+                    value={cardData.value}
+                    discountValue={cardData.discountValue}
+                    description={cardData.description}
+                    starsValue={cardData.starsValue}
+                    componentType={cardData.componentType}
+                    minimumPoints={cardData.minimumOrder}
+                  />
+                ))}
+              </div>
+            </div>
 
-                  <div className={styles.arrow}>
-                    <Image src={arrow} alt='Ordenar por' />
-                  </div>
-                </div>
+            <div className={styles.pagination}>
+              <div onClick={handlePreviousPage} className={currentPage === 1 ? styles.disabled : styles.arrow}>
+                <Image src={backarrow} alt='Anterior' />
+              </div>
 
-                {orderDropdown && (
-                  <div className={styles.activeOrderDropdown}>
-                    <div className={styles.option}>Menor preço</div>
+              {renderPageNumbers()}
 
-                    <div className={styles.option}>Maior Preço</div>
-
-                    <div className={styles.option}>Em estoque</div>
-                  </div>
-                )}
+              <div onClick={handleNextPage} className={currentPage === totalPages ? styles.disabled : styles.arrow}>
+                <Image src={nextarrow} alt='Próximo' />
               </div>
             </div>
           </div>
 
-          <div className={styles.widthLimiter}>
-            <div className={styles.commerce}>
-              {currentCardsData.map((cardData, index) => (
-                <CommerceCard
-                  key={index}
-                  id={cardData.id}
-                  image={cardData.image}
-                  productName={cardData.productName}
-                  value={cardData.value}
-                  discountValue={cardData.discountValue}
-                  description={cardData.description}
-                  starsValue={cardData.starsValue}
-                  componentType={cardData.componentType}
-                  minimumPoints={cardData.minimumOrder}
-                />
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.pagination}>
-            <div onClick={handlePreviousPage} className={currentPage === 1 ? styles.disabled : styles.arrow}>
-              <Image src={backarrow} alt='Anterior' />
-            </div>
-
-            {renderPageNumbers()}
-
-            <div onClick={handleNextPage} className={currentPage === totalPages ? styles.disabled : styles.arrow}>
-              <Image src={nextarrow} alt='Próximo' />
-            </div>
+          <div className={styles.footerContainer}>
+            <MPFooter />
           </div>
         </div>
       </div>
 
-      <div className={styles.footer}>
-        <Footer />
-      </div>
     </div>
   )
 }
