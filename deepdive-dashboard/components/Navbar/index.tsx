@@ -12,10 +12,12 @@ import styles from './styles.module.scss'
 import magnifier from '@/public/assets/icons/magnifier.svg'
 import cart from '@/public/assets/icons/cart.svg'
 import profilephoto from '@/public/assets/images/profilephoto.svg'
-import profileicon from '@/public/assets/icons/profile.svg'
+import configicon from '@/public/assets/icons/configicon.svg'
 import pointsicon from '@/public/assets/icons/points.svg'
 import logouticon from '@/public/assets/icons/logout.svg'
 import bell from '@/public/assets/icons/bell.svg'
+import downarrow from '@/public/assets/icons/Marketplace/downarrow.svg'
+import downarrowblack from '@/public/assets/icons/Marketplace/downarrowblack.svg'
 
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('')
@@ -105,27 +107,25 @@ const Navbar = () => {
 
               <div className={styles.points}>SAL: {balance}</div>
             </div>
+
+            <div className={styles.arrow}>
+              <Image src={downarrow} alt='Arrow' />
+            </div>
           </div>
 
           {dropdown &&
             <div className={styles.dropdownContainer}>
               <div className={styles.option} onClick={() => window.open('/profile', '_self')}>
                 <div className={styles.image}>
-                  <Image src={profileicon} alt='Profile' />
+                  <Image src={configicon} alt='Profile' />
                 </div>
 
                 <div className={styles.text}>
-                  Perfil
-                </div>
-              </div>
-
-              <div className={styles.option} onClick={() => window.open('/points', '_self')}>
-                <div className={styles.image}>
-                  <Image src={pointsicon} alt='Profile' />
+                  Configuração
                 </div>
 
-                <div className={styles.text}>
-                  Pontos
+                <div className={styles.arrow}>
+                  <Image src={downarrowblack} alt='Arrow' />
                 </div>
               </div>
 

@@ -2,15 +2,17 @@
 import Image from 'next/image'
 import { useContext, useEffect, useState } from 'react'
 
+import { CartContext } from '@/contexts/cartContext'
+
 import styles from './styles.module.scss'
 
 import close from '@/public/assets/icons/close.svg'
 import cart from '@/public/assets/icons/cart.svg'
 import star from '@/public/assets/icons/star.svg'
-import { CartContext } from '@/contexts/cartContext'
+import bag from '@/public/assets/icons/Marketplace/bag.svg'
 
 interface PopupData {
-  id: string, 
+  id: string,
   image: string,
   productName: string,
   value: number,
@@ -87,44 +89,28 @@ const BuyPopup = ({id, image, productName, value, discountValue, description, cl
         <div className={styles.leftContainer} style={{backgroundImage: `url(${image})`}} />
 
         <div className={styles.rightContainer}>
-          <div className={styles.close} onClick={handleClose}>
-            <Image src={close} alt='Fechar' className={styles.image} />
-          </div>
-
-          <div className={styles.titleAndStars}>
+          <div className={styles.titleAndClose}>
             <div className={styles.title}>
               {productName}
             </div>
 
-            <div className={styles.stars}>
-              <div className={styles.image}>
-                <Image src={star} alt='Estrelas' />
-              </div>
-
-              <div className={styles.value}>
-                {starsValue}
-              </div>
+            <div className={styles.close} onClick={handleClose}>
+              <Image src={close} alt='Fechar' className={styles.image} />
             </div>
           </div>
 
-          <div className={styles.price}>
-            <div className={styles.value}>
-              {componentType == 'normal' ?
-                <>
-                  {value} <span>SAL</span>
-                </>
-                :
-                <>
-                  ${(couponCount/discountValue) * value}
-                </>
-              }
+          <div className={styles.filterLabels}>
+            <div className={styles.label}>
+              Caracteristicas
             </div>
 
-            {componentType == 'normal' ?
-              <div className={styles.discount}>
-                {discountValue} SAL
-              </div>
-            : null}
+            <div className={styles.label}>
+              Caracteristicas
+            </div>
+
+            <div className={styles.label}>
+              Caracteristicas
+            </div>
           </div>
 
           <div className={styles.description}>
@@ -134,49 +120,89 @@ const BuyPopup = ({id, image, productName, value, discountValue, description, cl
           <div className={styles.buttonsContainer}>
             {componentType == 'normal' ?
               <div className={styles.quantityContainer}>
-                <div className={styles.title}>
-                  Quantidade
+                <div className={styles.left}>
+                  <div className={styles.value}>
+                    <div className={styles.title}>
+                      Valor
+                    </div>
+
+                    <div className={styles.text}>
+                      {value} SAL
+                    </div>
+                  </div>
                 </div>
 
-                <div className={styles.quantity}>
-                  <div className={styles.button} onClick={handleDecrement}>
-                    -
+                <div className={styles.right}>
+                  <div className={styles.title}>
+                    Quantidade
                   </div>
-                  <div className={styles.count}>{count}</div>
-                  <div className={styles.button} onClick={handleIncrement}>
-                    +
+
+                  <div className={styles.quantity}>
+                    <div className={styles.button} onClick={handleDecrement}>
+                      -
+                    </div>
+                    <div className={styles.count}>{count}</div>
+                    <div className={styles.button} onClick={handleIncrement}>
+                      +
+                    </div>
                   </div>
                 </div>
               </div>
               :
               <div className={styles.couponContainer}>
-                <div className={styles.text}>
-                  Pontuação define valor recebido
+                <div className={styles.left}>
+                  <div className={styles.title}>
+                    Quantidade
+                  </div>
+
+                  <div className={styles.quantity}>
+                    <div className={styles.button} onClick={handleDecrement}>
+                      -
+                    </div>
+                    <div className={styles.count}>{count}</div>
+                    <div className={styles.button} onClick={handleIncrement}>
+                      +
+                    </div>
+                  </div>
+
+                  <div className={styles.desc}>
+                    $ {discountValue} cada
+                  </div>
                 </div>
 
-                <div className={styles.quantity}>
-                  <div className={styles.button} onClick={handleCouponDecrement}>
-                    -
-                  </div>
-                  <div className={styles.count}>{couponCount} SAL</div>
-                  <div className={styles.button} onClick={handleCouponIncrement}>
-                    +
-                  </div>
-                </div>
+                <div className={styles.right}>
+                  <div className={styles.value}>
+                    <div className={styles.title}>
+                      Valor
+                    </div>
 
-                <div className={styles.text}>
-                  Mínimo de {minimumPoints} SAL
+                    <div className={styles.text}>
+                      $ {discountValue}
+                    </div>
+                  </div>
                 </div>
               </div>
             }
 
-            <div className={styles.button} onClick={handleBuy}>
-              <div className={styles.image}>
-                <Image src={cart} alt='Comprar' />
+            <div className={styles.buttons}>
+              <div className={styles.buyNow}>
+                <div className={styles.image}>
+                  <Image src={bag} alt='Comprar' />
+                </div>
+
+                <div className={styles.text}>
+                  Comprar agora
+                </div>
               </div>
 
-              <div className={styles.text}>
-                Adicionar ao carrinho
+              <div className={styles.button} onClick={handleBuy}>
+                <div className={styles.image}>
+                  <Image src={cart} alt='Comprar' />
+                </div>
+
+                <div className={styles.text}>
+                  Adicionar ao carrinho
+                </div>
               </div>
             </div>
           </div>

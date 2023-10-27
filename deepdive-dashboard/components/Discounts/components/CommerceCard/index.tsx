@@ -6,7 +6,8 @@ import BuyPopup from '../BuyPopup'
 import styles from './styles.module.scss'
 
 import star from '@/public/assets/icons/star.svg'
-import like from '@/public/assets/icons/like.svg'
+import liked from '@/public/assets/icons/like.svg'
+import notliked from '@/public/assets/icons/notliked.svg'
 
 interface CardData {
   id: string,
@@ -22,6 +23,7 @@ interface CardData {
 
 const CommerceCard = ({id, image, productName, value, discountValue, description, starsValue, componentType, minimumPoints}: CardData) => {
   const [buyPopup, setBuyPopup] = useState(false)
+  const [vote, setVote] = useState(false)
 
   return (
     <>
@@ -38,13 +40,13 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
         />
       }
 
-      <div className={styles.container} onClick={() => setBuyPopup(true)}>
-        <div className={styles.productImage}>
+      <div className={styles.container}>
+        <div className={styles.productImage} onClick={() => setBuyPopup(true)}>
           <Image src={image} alt='Foto do produto' layout='responsive' width={259} height={233} />
         </div>
 
         <div className={styles.infoContainer}>
-          <div className={styles.productName}>
+          <div className={styles.productName} onClick={() => setBuyPopup(true)}>
             {productName}
           </div>
 
@@ -86,11 +88,19 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
 
               <div className={styles.right}>
                 <div className={styles.buy} onClick={() => setBuyPopup(true)}>
-                  {value}
-                </div>
+                  {componentType == 'normal' ?
+                    `${value} SAL`
+                  :
+                    `${'$'}${discountValue} - ${value}`
+                  }
+                  </div>
 
-                <div className={styles.like}>
-                  <Image src={like} alt='Like' width={40} />
+                <div className={styles.like} onClick={() => setVote(!vote)}>
+                  {vote == false ? 
+                    <Image src={liked} alt='Curtida' width={40} />
+                    :
+                    <Image src={notliked} alt='Não curtida' width={40} />
+                  }
                 </div>
               </div>
             </div>

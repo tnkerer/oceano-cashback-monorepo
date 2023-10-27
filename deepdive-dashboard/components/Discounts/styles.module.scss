@@ -80,17 +80,20 @@
               }
 
               .orderDropdown {
+                width: 175px;
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 gap: 8px;
                 border-radius: 6px;
                 border: 1px solid #E7E7E7;
                 padding: 8px 14px;
+                background: white;
 
                 font-size: 14px;
                 font-style: normal;
                 font-weight: 475;
-                line-height: 20px; /* 142.857% */
+                line-height: 20px;
                 letter-spacing: -0.05px;
                 color: #1751D0;
 
@@ -104,7 +107,7 @@
               }
 
               .activeOrderDropdown {
-                width: 167px;
+                width: calc(175px);
                 height: 150px;
                 position: absolute;
                 margin: 167px 0px 0px 94px;
@@ -118,6 +121,7 @@
                 z-index: 10;
 
                 .option {
+                  max-width: 190px;
                   padding: 10px 0px 10px 0px;
                   font-size: 14px;
                   font-style: normal;

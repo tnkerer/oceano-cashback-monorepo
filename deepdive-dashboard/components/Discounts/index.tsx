@@ -160,11 +160,11 @@ const DiscountsPage = () => {
 
                   {orderDropdown && (
                     <div className={styles.activeOrderDropdown}>
-                      <div className={styles.option}>Menor preço</div>
+                      <div className={styles.option} onClick={() => {setOrderByState('Menor Preço'); setOrderDropdown(false)}}>Menor preço</div>
 
-                      <div className={styles.option}>Maior Preço</div>
+                      <div className={styles.option} onClick={() => {setOrderByState('Maior Preço'); setOrderDropdown(false)}}>Maior Preço</div>
 
-                      <div className={styles.option}>Em estoque</div>
+                      <div className={styles.option} onClick={() => {setOrderByState('Em Estoque'); setOrderDropdown(false)}}>Em estoque</div>
                     </div>
                   )}
                 </div>
@@ -192,6 +192,30 @@ const DiscountsPage = () => {
                     minimumPoints={cardData.minimumOrder}
                   />
                 ))}
+
+                <CommerceCard
+                  id={'1'}
+                  image={'/assets/images/blackfriday.svg'}
+                  productName={'Nome do Produto'}
+                  value={5000}
+                  discountValue={4}
+                  description={'Lorem Ipsum is simply dummy text of the printing and typesetting industrk, Lorem Ipsum is simply dummy text of the printing and typesetting industrk, Lorem Ipsum is simply dummy text of the printing and typesetting industrk'}
+                  starsValue={5}
+                  componentType={'norma'}
+                  minimumPoints={5000}
+                />
+
+                <CommerceCard
+                  id={'1'}
+                  image={'/assets/images/blackfriday.svg'}
+                  productName={'Nome do Produto'}
+                  value={5000}
+                  discountValue={4}
+                  description={'Lorem Ipsum is simply dummy text of the printing and typesetting industrk, Lorem Ipsum is simply dummy text of the printing and typesetting industrk, Lorem Ipsum is simply dummy text of the printing and typesetting industrk'}
+                  starsValue={5}
+                  componentType={'normal'}
+                  minimumPoints={5000}
+                />
               </div>
             </div>
 

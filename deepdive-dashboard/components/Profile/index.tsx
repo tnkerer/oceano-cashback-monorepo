@@ -7,11 +7,14 @@ import TextInput from '../Auth/Reusable/TextInput'
 import styles from './styles.module.scss'
 
 import photo from '@/public/assets/images/profilephoto.svg'
+import pencil from '@/public/assets/icons/pencil.svg'
+import photochange from '@/public/assets/icons/photochange.svg'
 
 import { AccountContext } from '@/contexts/accountContext'
 
 import { updateUserData, changePassword } from '@/services/api'
-import Footer from '../Footer'
+import UserSidebar from '../UserSidebar'
+import ConfigSidebar from '../ConfigSidebar'
 
 const ProfilePage = () => {
   const [nameInputData, setNameInputData] = useState('')
@@ -83,14 +86,11 @@ const ProfilePage = () => {
     } catch (error) {
       alert(error)
     }
-
-    
-    
   }
 
   const handleAccountUpdate = () => {
     if (process.env.API_URL === undefined) {
-      alert('Cant Reach API URL')
+      alert('Sem conexão com URL da API.')
       return
     }
 
@@ -124,89 +124,129 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.navbarContainer}>
-        <Navbar />
+      <div className={styles.sidebarContainer}>
+        <UserSidebar />
       </div>
 
       <div className={styles.contentContainer}>
-        <div className={styles.infoContainer}>
-          <div className={styles.title}>
-            Informações da conta
-          </div>
-
-          <div className={styles.description}>
-            Edite seu perfil rapidamente
-          </div>
-
-          <div className={styles.photo}>
-            <Image width={100} src={photo} alt='Profile photo' className={styles.image} />
-          </div>
-
-          <div className={styles.inputContainer}>
-            <div className={styles.label}>
-              Nome
-            </div>
-
-            <TextInput password={false} placeholder='Nome' inputData={(inputData) => setNameInputData(inputData)} />
-          </div>
-
-          <div className={styles.inputContainer}>
-            <div className={styles.label}>
-              E-mail
-            </div>
-
-            <TextInput password={false} placeholder='E-mail' inputData={(inputData) => setEmailInputData(inputData)} />
-          </div>
-
-          {/* <div className={styles.inputContainer}>
-            <div className={styles.label}>
-              Celular
-            </div>
-
-            <TextInput password={false} placeholder='Celular' inputData={(inputData) => setPassInputData(inputData)} isDisabled={true}/>
-          </div> */}
-
-          <div className={styles.button} onClick={handleAccountUpdate}>
-            Atualizar agora
-          </div>
+        <div className={styles.navbarContainer}>
+          <Navbar />
         </div>
 
-        <div className={styles.newPassContainer}>
-          <div className={styles.title}>
-            Senha
+        <div className={styles.separatorContainer}>
+          <div className={styles.sidenav}>
+            <ConfigSidebar />
           </div>
 
-          <div className={styles.inputContainer}>
-            <div className={styles.label}>
-              Senha atual
+          <div className={styles.columnContainer}>
+            <div className={styles.firstRow}>
+              <div className={styles.profileContainer}>
+                <div className={styles.profileImage}>
+                  <Image src={photo} alt='Perfil' width={90} />
+                  <Image src={photochange} alt='Alterar Foto' className={styles.change} width={35}/>
+                </div>
+
+                <div className={styles.name}>
+                  Kauan Osvaldo
+                </div>
+
+                <div className={styles.number}>
+                  +000 1234 1234
+                </div>
+              </div>
+
+              <div className={styles.infoContainer}>
+                <div className={styles.title}>
+                  Informações gerais
+                </div>
+
+                <div className={styles.nameInput}>
+                  <div className={styles.label}>
+                    Nome
+                  </div>
+
+                  <div className={styles.input}>
+                    <TextInput placeholder='Nome' inputData={() => ''} password={false} />
+                  </div>
+                </div>
+
+                <div className={styles.buttons}>
+                  <div className={styles.button}>
+                    <div className={styles.text}>
+                      Edit
+                    </div>
+
+                    <div className={styles.icon}>
+                      <Image src={pencil} alt='Editar' />
+                    </div>
+                  </div>
+
+                  <div className={styles.button}>
+                    <div className={styles.text}>
+                      Atualizar
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <TextInput password={true} placeholder='Senha atual' inputData={(inputData) => setActualPassInputData(inputData)} />
-          </div>
+            <div className={styles.secondRow}>
+              <div className={styles.title}>
+                Segurança
+              </div>
 
-          <div className={styles.inputContainer}>
-            <div className={styles.label}>
-              Nova senha
+              <div className={styles.inputContainer}>
+                <div className={styles.input}>
+                  <div className={styles.label}>
+                    E-mail
+                  </div>
+
+                  <div className={styles.inputComponent}>
+                    <TextInput placeholder='E-mail' inputData={() => ''} password={false} />
+                  </div>
+                </div>
+
+                <div className={styles.input}>
+                  <div className={styles.label}>
+                    E-mail
+                  </div>
+
+                  <div className={styles.inputComponent}>
+                    <TextInput placeholder='Senha' inputData={() => ''} password={true} />
+                  </div>
+                </div>
+
+                <div className={styles.input}>
+                  <div className={styles.label}>
+                    E-mail
+                  </div>
+
+                  <div className={styles.inputComponent}>
+                    <TextInput placeholder='Celular' inputData={() => ''} password={false} />
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.buttons}>
+                <div className={styles.button}>
+                  <div className={styles.text}>
+                    Edit
+                  </div>
+
+                  <div className={styles.icon}>
+                    <Image src={pencil} alt='Editar' />
+                  </div>
+                </div>
+
+                <div className={styles.button}>
+                  <div className={styles.text}>
+                    Atualizar
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <TextInput password={false} placeholder='Senha atual' inputData={(inputData) => setNewPassInputData(inputData)} />
-          </div>
-
-          <div className={styles.inputContainer}>
-            <div className={styles.label}>
-              Digite novamente a senha
-            </div>
-
-            <TextInput password={false} placeholder='Senha atual' inputData={(inputData) => setAgainNewPassInputData(inputData)} />
-          </div>
-
-          <div className={styles.button} onClick={handlePasswordChange}>
-            Salvar
           </div>
         </div>
-      </div>
-      <div className={styles.footer}>
-        <Footer />
       </div>
     </div>
   )
