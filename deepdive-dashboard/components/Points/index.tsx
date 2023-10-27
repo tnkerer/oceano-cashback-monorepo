@@ -1,16 +1,17 @@
 import Image from 'next/image'
 
 import Navbar from '../Navbar'
+import UserSidebar from '../UserSidebar'
+import ConfigSidebar from '../ConfigSidebar'
 import PointsHistory from './components/PointsHistory'
 import BuyHistory from './components/BuyHistory'
 
 import styles from './styles.module.scss'
 
-import photo from '@/public/assets/images/profilephoto.svg'
+import coin from '@/public/assets/icons/coin.svg'
 
 import { AccountContext } from '@/contexts/accountContext'
 import { useContext, useEffect } from 'react'
-import Footer from '../Footer'
 
 const PointsPage = () => {
 
@@ -18,49 +19,59 @@ const PointsPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.navbarContainer}>
-        <Navbar />
+      <div className={styles.sidebar}>
+        <UserSidebar />
       </div>
 
       <div className={styles.contentContainer}>
-        <div className={styles.profileContainer}>
-          <div className={styles.photo}>
-            <Image width={120} src={photo} alt='Profile photo' />
-          </div>
-
-          <div className={styles.name}>
-            {name}
-          </div>
-
-          <div className={styles.points}>
-            Você possui: <span>{balance} SAL</span>
-          </div>
+        <div className={styles.navbarContainer}>
+          <Navbar />
         </div>
 
         <div className={styles.historyContainer}>
-          <div className={styles.pointsHistory}>
-            <div className={styles.label}>
-              Histórico de pontos
-            </div>
-
-            <div className={styles.history}>
-              <PointsHistory />
-            </div>
+          <div className={styles.configsidebar}>
+            <ConfigSidebar />
           </div>
 
-          <div className={styles.pointsHistory}>
-            <div className={styles.label}>
-              Histórico de compras
+          <div className={styles.content}>
+            <div className={styles.title}>
+              Registros
             </div>
 
-            <div className={styles.history}>
-              <BuyHistory />
+            <div className={styles.text}>
+              Tellus molestie nunc non blandit massa enim. In iaculis nunc sed augue lacus viverra vitae congue.
+            </div>
+
+            <div className={styles.wallet}>
+              <div className={styles.icon}>
+                <Image src={coin} alt='Sal' />
+              </div>
+
+              <div className={styles.sal}>
+                Saldo: <span>{wallet} SAL</span>
+              </div>
+            </div>
+
+            <div className={styles.charts}>
+
+              <div className={styles.chart}>
+                <div className={styles.subtitle}>
+                  Histórico de pontos
+                </div>
+                <PointsHistory />
+              </div>
+
+
+              <div className={styles.chart}>
+                <div className={styles.subtitle}>
+                  Histórico de pontos
+                </div>
+
+                <BuyHistory />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className={styles.footer}>
-        <Footer />
       </div>
     </div>
   )

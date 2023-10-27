@@ -18,7 +18,7 @@ const UserSidebar = () => {
       </div>
 
       <div className={styles.navigationContainer}>
-        <div className={styles.option}>
+        <div className={styles.option} onClick={() =>  window.open('/dashboard', '_self')}>
           <div className={styles.notChecked}>
             <div className={styles.icon}>
               <Image src={dashboard} alt='Icon' />
@@ -30,7 +30,7 @@ const UserSidebar = () => {
           </div>
         </div>
 
-        <div className={styles.option} onClick={() => setMarketplace(!marketplace)}>
+        <div className={styles.option} onClick={() => {setMarketplace(!marketplace); window.open('/discounts', '_self')}}>
           <div className={styles.notChecked}>
             <div className={styles.icon}>
               <Image src={market} alt='Icon' />

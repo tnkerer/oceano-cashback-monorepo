@@ -208,7 +208,7 @@ const ProfilePage = () => {
 
                 <div className={styles.input}>
                   <div className={styles.label}>
-                    E-mail
+                    Senha
                   </div>
 
                   <div className={styles.inputComponent}>
@@ -218,7 +218,7 @@ const ProfilePage = () => {
 
                 <div className={styles.input}>
                   <div className={styles.label}>
-                    E-mail
+                    Celular
                   </div>
 
                   <div className={styles.inputComponent}>
