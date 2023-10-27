@@ -7,60 +7,22 @@
   background: var(--blue);
   color: white;
   padding: 0px 35px 0px 35px;
-
-  .logo {
-    transform: scale(1.05);
-    transition: 0.4s;
-
-    &:hover {
-      cursor: pointer;
-      filter: brightness(0.77);
-    }
-  }
-
-  .optionsContainer {
-    display: flex;
-    gap: 34px;
-
-    .option {
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      transition: 0.3s;
-
-      &:hover {
-        cursor: pointer;
-        filter: brightness(0.8);
-      }
-    }
-
-    .selectedOption {
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      transition: 0.2s;
-      border-bottom: 2px solid white;
-      padding-bottom: 3px;
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
+  border-left: 3px solid rgb(42, 121, 173);
 
   .searchBar {
     width: 596px;
     height: 42px;
     display: flex;
     justify-content: space-between;
+    flex-direction: row-reverse;
     background: white;
     border-radius: 8px;
     align-items: center;
     padding: 0px 14px 0px 0px;
 
     .image {
+      margin-left: 10px;
+
       &:hover {
         cursor: pointer;
       }
@@ -112,10 +74,16 @@
         padding: 2px 8px;
         border-radius: 100%;
       }
-
     }
 
+    .notifications {
+      transition: 0.5s;
 
+      &:hover {
+        cursor: pointer;
+        filter: brightness(0.8);
+      }
+    }
 
     .profile {
       cursor: pointer;
@@ -149,8 +117,6 @@
     }
 
     .dropdownContainer {
-      width: 150px;
-      height: 160px;
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -176,6 +142,7 @@
             margin-top: 4px;
             transform: scale(1.3);
           }
+          color: #1751D0;
         }
 
         &:hover {

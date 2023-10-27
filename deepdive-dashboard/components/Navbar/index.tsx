@@ -1,20 +1,23 @@
 import Image from 'next/image'
 import { useEffect, useState, useContext, KeyboardEvent } from 'react'
 
-import styles from './styles.module.scss'
-
-import logo from '@/public/assets/brand/whitelogo.svg'
-import magnifier from '@/public/assets/icons/magnifier.svg'
-import cart from '@/public/assets/icons/cart.svg'
-import profilephoto from '@/public/assets/images/profilephoto.svg'
-import profileicon from '@/public/assets/icons/profile.svg'
-import pointsicon from '@/public/assets/icons/points.svg'
-import logouticon from '@/public/assets/icons/logout.svg'
 import Cart from '../Cart'
 
 import { AccountContext } from '@/contexts/accountContext'
 import { ProductsContext } from '@/contexts/productContext'
 import { CartContext } from '@/contexts/cartContext'
+
+import styles from './styles.module.scss'
+
+import magnifier from '@/public/assets/icons/magnifier.svg'
+import cart from '@/public/assets/icons/cart.svg'
+import profilephoto from '@/public/assets/images/profilephoto.svg'
+import configicon from '@/public/assets/icons/configicon.svg'
+import pointsicon from '@/public/assets/icons/points.svg'
+import logouticon from '@/public/assets/icons/logout.svg'
+import bell from '@/public/assets/icons/bell.svg'
+import downarrow from '@/public/assets/icons/Marketplace/downarrow.svg'
+import downarrowblack from '@/public/assets/icons/Marketplace/downarrowblack.svg'
 
 const Navbar = () => {
   const [selectedOption, setSelectedOption] = useState('')
@@ -74,36 +77,9 @@ const Navbar = () => {
       }
 
       <div className={styles.container}>
-        <div className={styles.logo} onClick={() => { setSelectedOption('discounts'); window.open('/discounts', '_self') }}>
-          <Image src={logo} alt='Logo' />
-        </div>
-
-        <div className={styles.optionsContainer}>
-          <div
-            className={
-              selectedOption == 'discounts'
-                ? styles.selectedOption
-                : styles.option
-            }
-            onClick={() => { setSelectedOption('discounts'); window.open('/discounts', '_self') }}
-          >
-            Descontos
-          </div>
-
-          <div
-            className={
-              selectedOption == 'about' ? styles.selectedOption : styles.option
-            }
-            // eslint-disable-next-line semi
-            onClick={() => { setSelectedOption('about'); window.open('/about', '_self') }}
-          >
-            Sobre
-          </div>
-        </div>
-
         <div className={styles.searchBar}>
           <input type='text'
-            placeholder=" Pesquisar"
+            placeholder=" Pesquise o que você deseja!"
             onChange={(e) => setSearchText(e.target.value)}
             onKeyDown={handleEnterPress}
             className={styles.HTMLinput} />
@@ -114,6 +90,10 @@ const Navbar = () => {
         </div>
 
         <div className={styles.userContainer}>
+          <div className={styles.notifications}>
+            <Image src={bell} alt='Notificações' />
+          </div>
+
           <div className={styles.cart} onClick={() => { setCartOpen(!cartOpen); setDropdown(false) }}>
             <Image src={cart} alt='Cart' /> 
             {hasNotification ? <span className={styles.cartnotification}>{productsInCart}</span> : <span className={styles.nonotification}></span>}
@@ -127,27 +107,25 @@ const Navbar = () => {
 
               <div className={styles.points}>SAL: {balance}</div>
             </div>
+
+            <div className={styles.arrow}>
+              <Image src={downarrow} alt='Arrow' />
+            </div>
           </div>
 
           {dropdown &&
             <div className={styles.dropdownContainer}>
               <div className={styles.option} onClick={() => window.open('/profile', '_self')}>
                 <div className={styles.image}>
-                  <Image src={profileicon} alt='Profile' />
+                  <Image src={configicon} alt='Profile' />
                 </div>
 
                 <div className={styles.text}>
-                  Perfil
-                </div>
-              </div>
-
-              <div className={styles.option} onClick={() => window.open('/points', '_self')}>
-                <div className={styles.image}>
-                  <Image src={pointsicon} alt='Profile' />
+                  Configuração
                 </div>
 
-                <div className={styles.text}>
-                  Pontos
+                <div className={styles.arrow}>
+                  <Image src={downarrowblack} alt='Arrow' />
                 </div>
               </div>
 

@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
+import BuyPopup from '../BuyPopup'
+
 import styles from './styles.module.scss'
 
 import star from '@/public/assets/icons/star.svg'
-import cart from '@/public/assets/icons/cart.svg'
-import BuyPopup from '../BuyPopup'
+import liked from '@/public/assets/icons/like.svg'
+import notliked from '@/public/assets/icons/notliked.svg'
 
 interface CardData {
   id: string,
@@ -21,6 +23,7 @@ interface CardData {
 
 const CommerceCard = ({id, image, productName, value, discountValue, description, starsValue, componentType, minimumPoints}: CardData) => {
   const [buyPopup, setBuyPopup] = useState(false)
+  const [vote, setVote] = useState(false)
 
   return (
     <>
@@ -38,17 +41,17 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
       }
 
       <div className={styles.container}>
-        <div className={styles.productImage}>
+        <div className={styles.productImage} onClick={() => setBuyPopup(true)}>
           <Image src={image} alt='Foto do produto' layout='responsive' width={259} height={233} />
         </div>
 
         <div className={styles.infoContainer}>
-          <div className={styles.productName}>
+          <div className={styles.productName} onClick={() => setBuyPopup(true)}>
             {productName}
           </div>
 
           <div className={styles.productInfo}>
-            <div className={styles.points}>
+            {/* <div className={styles.points}>
               <div className={styles.value}>
                 <span>{componentType == 'coupon' ? '$' : null}{value} {componentType == 'coupon' ? '-' : null} </span> {componentType == 'normal' ? 'SAL' : null}
               </div>
@@ -66,7 +69,7 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
                   }
                 </>
               }
-            </div>
+            </div> */}
 
             <div className={styles.description}>
               {description.slice(0, 80) + '...'}
@@ -83,8 +86,22 @@ const CommerceCard = ({id, image, productName, value, discountValue, description
                 </div>
               </div>
 
-              <div className={styles.buy} onClick={() => setBuyPopup(true)}>
-                <Image src={cart} alt='Comprar' style={{marginLeft: '-2px'}} />
+              <div className={styles.right}>
+                <div className={styles.buy} onClick={() => setBuyPopup(true)}>
+                  {componentType == 'normal' ?
+                    `${value} SAL`
+                  :
+                    `${'$'}${discountValue} - ${value}`
+                  }
+                  </div>
+
+                <div className={styles.like} onClick={() => setVote(!vote)}>
+                  {vote == false ? 
+                    <Image src={liked} alt='Curtida' width={40} />
+                    :
+                    <Image src={notliked} alt='Não curtida' width={40} />
+                  }
+                </div>
               </div>
             </div>
           </div>

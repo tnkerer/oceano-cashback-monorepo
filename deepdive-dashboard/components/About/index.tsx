@@ -1,5 +1,5 @@
 import Footer from '../Footer'
-import Navbar from '../Navbar'
+import NavbarLandingPage from '../LandingPage/components/NavbarLandingPage'
 
 import styles from './styles.module.scss'
 
@@ -7,7 +7,7 @@ const AboutPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.navbarContainer}>
-        <Navbar />
+        <NavbarLandingPage />
       </div>
 
       <div className={styles.contentContainer}>
