@@ -1,6 +1,6 @@
 .container {
-  width: 650px;
-  height: 520px;
+  min-width: 540px;
+  min-height: 520px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
