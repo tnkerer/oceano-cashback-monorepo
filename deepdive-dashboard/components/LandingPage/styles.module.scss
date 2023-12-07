@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  font-family: 'Lexend', sans-serif;
 
   .contentContainer {
     width: 100%;
@@ -28,14 +29,14 @@
           width: 860px;
           color: #0A090B;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 60px;
           font-style: normal;
           font-weight: 600;
           line-height: 65px;
 
           :is(span) {
-            color: #1751D0;
+            color: #2C1DFE;
 
           }
         }
@@ -43,7 +44,7 @@
         .description {
           color: #4F4D55;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
@@ -52,13 +53,13 @@
 
         .button {
           padding: 14px 32px;
-          background: #1751D0;
+          background: #2C1DFE;
           border-radius: 100px;
           transition: 0.5s;
 
           color: #FFF;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 16px;
           font-style: normal;
           font-weight: 600;
@@ -67,8 +68,8 @@
           &:hover {
             cursor: pointer;
             background: white;
-            outline: 1px solid #1751d0;
-            color: #1751d0;
+            outline: 1px solid #2C1DFE;
+            color: #2C1DFE;
           }
         }
       }
@@ -82,7 +83,7 @@
         .text {
           color: #4F4D55;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 16px;
           font-style: normal;
           font-weight: 500;
@@ -179,7 +180,7 @@
           width: 710px;
           color: #4F4D55;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 18px;
           font-style: normal;
           font-weight: 500;
@@ -209,7 +210,7 @@
 
           .title {
             color: #4F4D55;
-            font-family: Inter;
+            font-family: Lexend;
             font-size: 24px;
             font-style: normal;
             font-weight: 500;
@@ -218,7 +219,7 @@
 
           .boldDescription {
             color: #0A090B;
-            font-family: Inter;
+            font-family: Lexend;
             font-size: 20px;
             font-style: normal;
             font-weight: 600;
@@ -227,7 +228,7 @@
 
           .lightDescription {
             color: #4F4D55;
-            font-family: Inter;
+            font-family: Lexend;
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
@@ -265,7 +266,7 @@
           width: 710px;
           color: #4F4D55;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 18px;
           font-style: normal;
           font-weight: 500;
@@ -302,7 +303,7 @@
 
               .name {
                 color: #000;
-                font-family: Inter;
+                font-family: Lexend;
                 font-size: 22px;
                 font-style: normal;
                 font-weight: 600;
@@ -311,7 +312,7 @@
 
               .social {
                 color: #000;
-                font-family: Inter;
+                font-family: Lexend;
                 font-size: 14px;
                 font-style: normal;
                 font-weight: 500;
@@ -322,7 +323,7 @@
 
           .text {
             color: #0A090B;
-            font-family: Inter;
+            font-family: Lexend;
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
@@ -331,7 +332,7 @@
 
           .date {
             color: rgba(0, 0, 0, 0.50);
-            font-family: Inter;
+            font-family: Lexend;
             font-size: 16px;
             font-style: normal;
             font-weight: 500;
@@ -372,7 +373,7 @@
           width: 710px;
           color: #4F4D55;
           text-align: center;
-          font-family: Inter;
+          font-family: Lexend;
           font-size: 18px;
           font-style: normal;
           font-weight: 500;

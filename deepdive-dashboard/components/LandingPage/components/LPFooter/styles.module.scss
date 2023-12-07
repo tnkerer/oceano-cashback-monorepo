@@ -10,7 +10,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #1751D0;
+    background: #2C1DFE;
 
     .cta{
       display: flex;
@@ -38,7 +38,7 @@
 
       .button {
         background: white;
-        color: #1751D0;
+        color: #2C1DFE;
         padding: 14px 32px;
         border-radius: 100px;
         transition: 0.3s;
@@ -51,7 +51,7 @@
         &:hover {
           cursor: pointer;
           color: white;
-          background: #1751D0;
+          background: #2C1DFE;
           outline: 1px solid white;
         }
       }
@@ -101,7 +101,7 @@
           &:hover {
             cursor: pointer;
             font-size: 18px;
-            color: #1751D0;
+            color: #2C1DFE;
           }
         }
       }

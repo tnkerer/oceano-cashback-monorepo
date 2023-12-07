@@ -1,9 +1,9 @@
 <svg width="1920" height="1000" viewBox="0 0 1920 1000" fill="none" xmlns="http://www.w3.org/2000/svg">
   <mask id="mask0_437_2023" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="1000">
-  <rect width="1920" height="1000" fill="#1751D0"/>
+  <rect width="1920" height="1000" fill="#2C1DFE"/>
   </mask>
   <g mask="url(#mask0_437_2023)">
-  <rect width="1920" height="1000" fill="#1751D0"/>
+  <rect width="1920" height="1000" fill="#2C1DFE"/>
   <g filter="url(#filter0_f_437_2023)">
   <ellipse cx="219.201" cy="796.579" rx="441.675" ry="343.886" fill="#50A0DA"/>
   </g>

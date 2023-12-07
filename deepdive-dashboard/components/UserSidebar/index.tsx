@@ -6,10 +6,20 @@ import logo from '@/public/assets/brand/whitelogo.svg'
 import dashboard from '@/public/assets/icons/Marketplace/dashboard.svg'
 import market from '@/public/assets/icons/Marketplace/market.svg'
 import arrow from '@/public/assets/icons/Marketplace/arrow.svg'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const UserSidebar = () => {
-  const [marketplace, setMarketplace] = useState(false)
+  const [marketplaceState, setMarketplaceState] = useState(false)
+  const [dashboardState, setDashboardState] = useState(false)
+  const [adminState, setAdminState] = useState(false)
+  const [webPath, setWebPath] = useState('')
+
+  useEffect(() => {
+    setMarketplaceState(window.location.pathname == '/discounts' ? true : false)
+    setDashboardState(window.location.pathname == '/points' ? true : window.location.pathname == '/profile' ? true : false)
+    // setAdminState()
+    setWebPath(window.location.pathname)
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -18,26 +28,14 @@ const UserSidebar = () => {
       </div>
 
       <div className={styles.navigationContainer}>
-        <div className={styles.option} onClick={() =>  window.open('/dashboard', '_self')}>
-          <div className={styles.notChecked}>
-            <div className={styles.icon}>
-              <Image src={dashboard} alt='Icon' />
-            </div>
-
-            <div className={styles.text}>
-              Dashboard
-            </div>
-          </div>
-        </div>
-
-        <div className={styles.option} onClick={() => {setMarketplace(!marketplace); window.open('/discounts', '_self')}}>
+        <div className={styles.option} onClick={() => window.location.pathname == '/discounts' ? null : window.open('/discounts', '_self')}>
           <div className={styles.notChecked}>
             <div className={styles.icon}>
               <Image src={market} alt='Icon' />
             </div>
 
             <div className={styles.text}>
-              Marketplace
+              Produtos
             </div>
 
             <div className={styles.arrow}>
@@ -45,7 +43,7 @@ const UserSidebar = () => {
             </div>
           </div>
 
-          {marketplace &&
+          {marketplaceState &&
             <div className={styles.checked}>
               <div className={styles.typeContainer}>
                 <div className={styles.type}>
@@ -58,6 +56,36 @@ const UserSidebar = () => {
 
                 <div className={styles.type}>
                   Tipo de produto
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div className={styles.option} onClick={() => window.location.pathname == '/points' ? null : window.location.pathname == '/profile' ? null : window.open('/points', '_self')}>
+          <div className={styles.notChecked}>
+            <div className={styles.icon}>
+              <Image src={market} alt='Icon' />
+            </div>
+
+            <div className={styles.text}>
+              Dashboard
+            </div>
+
+            <div className={styles.arrow}>
+              <Image src={arrow} alt='Arrow' />
+            </div>
+          </div>
+
+          {dashboardState &&
+            <div className={styles.checked}>
+              <div className={styles.typeContainer}>
+                <div className={styles.type} onClick={() => window.location.pathname == '/points' ? null : window.open('/points', '_self')}>
+                {webPath == '/points' ? <span>Pontos</span> : 'Pontos' } 
+                </div>
+
+                <div className={styles.type} onClick={() => window.location.pathname == '/profile' ? null : window.open('/profile', '_self')}>
+                {webPath == '/profile' ? <span>Painel de Controle</span> : 'Painel de Controle' } 
                 </div>
               </div>
             </div>

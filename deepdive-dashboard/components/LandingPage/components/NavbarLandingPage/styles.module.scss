@@ -27,7 +27,7 @@
     display: flex;
     gap: 32px;
 
-    font-family: Inter;
+    font-family: Lexend;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -42,7 +42,7 @@
     }
 
     .selectedOption {
-      color: #1751d0;
+      color: #2C1DFE;
 
       &:hover {
         cursor: pointer;
@@ -57,7 +57,7 @@
 
     .loginButton {
       color: black;
-      font-family: Inter;
+      font-family: Lexend;
       font-size: 14px;
       font-style: normal;
       font-weight: 475;
@@ -66,12 +66,12 @@
 
       &:hover {
         cursor: pointer;
-        color: #1751d0;
+        color: #2C1DFE;
       }
     }
 
     .registerButton {
-      background: #1751d0;
+      background: #2C1DFE;
       color: white;
       padding: 14px;
       border-radius: 6px;
@@ -86,8 +86,8 @@
       &:hover {
         cursor: pointer;
         background: white;
-        outline: 1px solid #1751d0;
-        color: #1751d0;
+        outline: 1px solid #2C1DFE;
+        color: #2C1DFE;
       }
     }
   }

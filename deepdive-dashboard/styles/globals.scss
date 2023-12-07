@@ -1,12 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --blue: #1751D0;
+  --blue: #2C1DFE;
   --gray: #4F4D55;
   --lightgray: #DCDCDE;
-  --green: #21A335;
-  --yellow: #FBBC04;
-  --red: #EA4335;
+  --green: #00FC97;
+  --FFD703: #FBBC04;
+  --red: #FF4736;
   --line: #F1F1F1;
   --border: #E6E6E6;
   --hover: #F8F8F8;
@@ -22,7 +22,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Lexend', sans-serif;
 }
 
 a {
