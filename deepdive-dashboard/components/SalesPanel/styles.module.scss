@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Lexend', sans-serif;
+
+  .sidebarContainer {
+    z-index: 1;
+  }
+
+  .contentContainer {
+    width: calc(100% - 230px);
+    margin-left: 230px;
+    display: flex;
+    flex-direction: column;
+
+    .separatorContainer {
+      padding: 50px;
+    }
+  }
+}
