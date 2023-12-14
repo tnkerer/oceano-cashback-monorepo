@@ -86,28 +86,28 @@ const SalesPanelComponent = () => {
               
               {categoryActive &&
                 <div className={styles.categoryDropdown}>
-                  <div className={styles.option} onClick={() => setCategorySelected('Lorem')}>
-                    Lorem
+                  <div className={styles.option} onClick={() => setCategorySelected('Lorem1')}>
+                    Lorem1
                   </div>
 
-                  <div className={styles.option} onClick={() => setCategorySelected('Lorem')}>
-                    Lorem
+                  <div className={styles.option} onClick={() => setCategorySelected('Lorem2')}>
+                    Lorem2
                   </div>
 
-                  <div className={styles.option} onClick={() => setCategorySelected('Lorem')}>
-                    Lorem
+                  <div className={styles.option} onClick={() => setCategorySelected('Lorem3')}>
+                    Lorem3
                   </div>
 
-                  <div className={styles.option} onClick={() => setCategorySelected('Lorem')}>
-                    Lorem
+                  <div className={styles.option} onClick={() => setCategorySelected('Lorem4')}>
+                    Lorem4
                   </div>
 
-                  <div className={styles.option} onClick={() => setCategorySelected('Lorem')}>
-                    Lorem
+                  <div className={styles.option} onClick={() => setCategorySelected('Lorem5')}>
+                    Lorem5
                   </div>
 
-                  <div className={styles.option} onClick={() => setCategorySelected('Lorem')}>
-                    Lorem
+                  <div className={styles.option} onClick={() => setCategorySelected('Lorem6')}>
+                    Lorem6
                   </div>
                 </div>
               }
@@ -119,7 +119,7 @@ const SalesPanelComponent = () => {
               </div>
 
               <div className={styles.input}>
-                <input type="text" className={styles.HTMLinput} />
+                <textarea className={styles.HTMLinput} />
               </div>
             </div>
 
@@ -144,20 +144,25 @@ const SalesPanelComponent = () => {
             </div>
 
             <div className={styles.imageViewer}>
-              <div className={styles.icon}>
-                <Image src={successstatus} alt='Imagem' />
-              </div>
+              <div>
+                <div className={styles.icon}>
+                  <Image src={successstatus} alt='Imagem' />
+                </div>
+              
 
-              <div className={styles.filename}>
-                {'File Name.png'}
+                <div className={styles.filename}>
+                  {'File Name.png'}
+                </div>
               </div>
+              
+              <div>
+                <div className={styles.filesize}>
+                  {'4.0MB'}
+                </div>
 
-              <div className={styles.filesize}>
-                {'4.0MB'}
-              </div>
-
-              <div className={styles.delete}>
-                <Image src={deleteimg} alt='Deletar' />
+                <div className={styles.delete}>
+                  <Image src={deleteimg} alt='Deletar' />
+                </div>
               </div>
             </div>
 

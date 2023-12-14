@@ -1,10 +1,9 @@
 .container {
-  
   width: 100%;
   display: flex;
-  border-radius: 5px;
+  border-radius: 10px;
   border: 1px solid #E7E7E7;
-  background: #F3F3F3;
+  background: white;
   padding: 10px 0px;
 
   .HTMLinput {
@@ -13,7 +12,7 @@
     border: none;
     font-family: 'Lexend', sans-serif;
     padding: 0px 0px 0px 10px;
-    background: #F3F3F3;
+    background: white;
     
   }
 

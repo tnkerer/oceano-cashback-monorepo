@@ -80,12 +80,12 @@ const UserSidebar = () => {
           {dashboardState &&
             <div className={styles.checked}>
               <div className={styles.typeContainer}>
+                <div className={styles.type} onClick={() => window.location.pathname == '/profile' ? null : window.open('/profile', '_self')}>
+                {webPath == '/profile' ? <span>Editar Perfil</span> : 'Editar Perfil' } 
+                </div>
+                
                 <div className={styles.type} onClick={() => window.location.pathname == '/points' ? null : window.open('/points', '_self')}>
                 {webPath == '/points' ? <span>Pontos</span> : 'Pontos' } 
-                </div>
-
-                <div className={styles.type} onClick={() => window.location.pathname == '/profile' ? null : window.open('/profile', '_self')}>
-                {webPath == '/profile' ? <span>Painel de Controle</span> : 'Painel de Controle' } 
                 </div>
               </div>
             </div>
