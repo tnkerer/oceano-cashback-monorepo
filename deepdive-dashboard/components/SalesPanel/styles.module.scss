@@ -315,6 +315,13 @@
             font-weight: 475;
             line-height: 20px; /* 142.857% */
             letter-spacing: -0.05px;
+
+            transition: 0.3s;
+
+            &:hover {
+              cursor: pointer;
+              filter: brightness(0.8);
+            }
           }
         }
       }
