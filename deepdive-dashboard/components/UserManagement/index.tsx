@@ -1,10 +1,13 @@
 import React, { useState } from 'react' 
+import Image from 'next/image'
 
 import Navbar from '../Navbar'
 import UserSidebar from '../UserSidebar'
+import ConfirmationPopup from './components/ConfirmationPopup'
+import AddSalPopup from './components/AddSalPopup'
+import SendMessagePopup from './components/SendMessagePopup'
 
 import styles from './styles.module.scss'
-import Image from 'next/image'
 
 import graydownarrow from '@/public/assets/icons/lightgraydownarrow.svg'
 import filterfilled from '@/public/assets/icons/filterfilled.svg'
@@ -79,9 +82,38 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ data, handleRemove }) => {
   const [editPopup, setEditPopup] = useState(false)
   const [addSalPopup, setAddSalPopup] = useState(false)
+  const [editConfirmationPopup, setEditConfirmationPopup] = useState(false)
+  const [addSalConfirmationPopup, setAddSalConfirmationPopup] = useState(false)
+  const [sendMessagePopup, setSendMessagePopup] = useState(false)
+  const [sendMessageConfirmationPopup, setSendMessageConfirmationPopup] = useState(false)
 
   const [role, setRole] = useState('')
   const [roleDropdown, setRoleDropdown] = useState(false)
+
+  const handleEditConfirm = () => {
+    setEditConfirmationPopup(false)
+    setEditPopup(false)
+  }
+
+  const handleEditCancel = () => {
+    setEditConfirmationPopup(false)
+  }
+
+  const handleAddSalConfirm = () => {
+    setAddSalConfirmationPopup(true)
+  }
+
+  const handleAddSalCancel = () => {
+    setAddSalPopup(false)
+  }
+
+  const handleSendMessageConfirm = () => {
+    setSendMessageConfirmationPopup(true)
+  }
+
+  const handleSendMessageCancel = () => {
+    setSendMessagePopup(false)
+  }
 
   return (
     <>
@@ -111,8 +143,8 @@ const Table: React.FC<TableProps> = ({ data, handleRemove }) => {
               <td className={styles.controlButtons}>
                 <div onClick={() => handleRemove(item.id)}><Image src={trashimg} alt='Deletar' /></div>
                 <div onClick={() => setEditPopup(true)}><Image src={editicon} alt='Editar' /></div>
-                <div><Image src={moneyicon} alt='Adicionar SAL' /></div>
-                <div><Image src={mailicon} alt='Mensagem' /></div>
+                <div onClick={() => setAddSalPopup(true)}><Image src={moneyicon} alt='Adicionar SAL' /></div>
+                <div onClick={() => setSendMessagePopup(true)}><Image src={mailicon} alt='Mensagem' /></div>
               </td>
             </tr>
           ))}
@@ -205,12 +237,32 @@ const Table: React.FC<TableProps> = ({ data, handleRemove }) => {
                 Cancelar
               </div>
 
-              <div className={styles.confirmButton} onClick={() => setEditPopup(false)}>
+              <div className={styles.confirmButton} onClick={() => setEditConfirmationPopup(true)}>
                 Salvar
               </div>
             </div>
           </div>
         </div>
+      }
+
+      {editConfirmationPopup &&
+        <ConfirmationPopup text='Salvar as alterações do [Nome do Usuário]. Deseja continuar?' onCancel={handleEditCancel} onConfirm={handleEditConfirm} />
+      }
+
+      {addSalPopup &&
+        <AddSalPopup onConfirm={handleAddSalConfirm} onCancel={handleAddSalCancel} />
+      }
+
+      {addSalConfirmationPopup &&
+        <ConfirmationPopup onConfirm={() => {setAddSalConfirmationPopup(false); setAddSalPopup(false)}} onCancel={() => setAddSalConfirmationPopup(false)} text='Você está prestes a adicionar [Valor] à conta de [Nome do Usuário]. Deseja confirmar a transação?' />
+      }
+
+      {sendMessagePopup &&
+        <SendMessagePopup onSend={handleSendMessageConfirm} onCancel={handleSendMessageCancel} />
+      }
+
+      {sendMessageConfirmationPopup &&
+        <ConfirmationPopup onCancel={() => setSendMessageConfirmationPopup(false)} onConfirm={() => {setSendMessageConfirmationPopup(false); setSendMessagePopup(false)}} text='Sua mensagem está a caminho de [Nome do Usuário]. Deseja enviar?' />
       }
     </>
   )
