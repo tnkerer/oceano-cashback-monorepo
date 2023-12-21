@@ -18,9 +18,14 @@ const UserSidebar = () => {
   const [webPath, setWebPath] = useState('')
 
   useEffect(() => {
-    setMarketplaceState(window.location.pathname == '/discounts' ? true : false)
-    setDashboardState(window.location.pathname == '/points' ? true : window.location.pathname == '/profile' ? true : false)
-    setAdminState(window.location.pathname == '/salespanel' ? true : window.location.pathname == '/usermanagement' ? true : window.location.pathname == '/productmanagement' ? true : false)
+    setMarketplaceState(window.location.pathname === '/discounts')
+    setDashboardState(window.location.pathname === '/points' || window.location.pathname === '/profile')
+    setAdminState(
+      window.location.pathname === '/salespanel' ||
+      window.location.pathname === '/salesdashboard' ||
+      window.location.pathname === '/usermanagement' ||
+      window.location.pathname === '/productmanagement'
+    )
     setWebPath(window.location.pathname)
   }, [])
 
@@ -111,23 +116,27 @@ const UserSidebar = () => {
               </div>
             </div>
 
-            {adminState &&
+            {adminState && (
               <div className={styles.checked}>
                 <div className={styles.typeContainer}>
-                  <div className={styles.type} onClick={() => window.location.pathname == '/salespanel' ? null : window.open('/salespanel', '_self')}>
-                    Painel de Venda
+                  <div className={styles.type} onClick={() => webPath === '/salespanel' ? null : window.open('/salespanel', '_self')}>
+                    {webPath === '/salespanel' ? <span>Painel de Vendas</span> : 'Painel de Vendas' }
                   </div>
 
-                  <div className={styles.type} onClick={() => window.location.pathname == '/usermanagement' ? null : window.open('/usermanagement', '_self')}>
-                    Gestão de Usuário
+                  <div className={styles.type} onClick={() => webPath === '/salesdashboard' ? null : window.open('/salesdashboard', '_self')}>
+                    {webPath === '/salesdashboard' ? <span>Dashboard de Vendas</span> : 'Dashboard de Vendas' }
                   </div>
 
-                  <div className={styles.type} onClick={() => window.location.pathname == '/productmanagement' ? null : window.open('/productmanagement', '_self')}>
-                    Gestão de Produtos
+                  <div className={styles.type} onClick={() => webPath === '/usermanagement' ? null : window.open('/usermanagement', '_self')}>
+                    {webPath === '/usermanagement' ? <span>Gestão de Usuário</span> : 'Gestão de Usuário' }
+                  </div>
+
+                  <div className={styles.type} onClick={() => webPath === '/productmanagement' ? null : window.open('/productmanagement', '_self')}>
+                    {webPath === '/productmanagement' ? <span>Gestão de Produtos</span> : 'Gestão de Produtos' }
                   </div>
                 </div>
               </div>
-            }
+            )}
           </div>
         </div>
 

@@ -1,8 +1,8 @@
 import Head from 'next/head'
 
-import ProductManagementComponent from '@/components/ProductManagement'
+import SalesDashboardComponent from '@/components/SalesDashboard'
 
-export default function SalesPanel () {
+export default function SalesDashboard () {
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ export default function SalesPanel () {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <ProductManagementComponent />
+      <SalesDashboardComponent />
     </>
   )
 }

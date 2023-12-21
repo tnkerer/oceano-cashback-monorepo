@@ -1,11 +1,12 @@
-import styles from './styles.module.scss'
-
 import { useState } from 'react'
-import ReactQuill from 'react-quill'
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 import 'react-quill/dist/quill.snow.css'
+import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
 import TextInput from '@/components/Auth/Reusable/TextInput'
-import Image from 'next/image'
+
+import styles from './styles.module.scss'
 
 import sendicon from '@/public/assets/admin/send.svg'
 
