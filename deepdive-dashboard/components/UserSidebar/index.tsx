@@ -37,7 +37,7 @@ const UserSidebar = () => {
 
       <div className={styles.separatorContainer}>
         <div className={styles.navigationContainer}>
-          <div className={styles.option} onClick={() => window.location.pathname == '/discounts' ? null : window.open('/discounts', '_self')}>
+          <div className={styles.option}>
             <div className={styles.notChecked}>
               <div className={styles.icon}>
                 <Image src={market} alt='Icon' />
@@ -47,31 +47,23 @@ const UserSidebar = () => {
                 Produtos
               </div>
 
-              <div className={styles.arrow}>
-                <Image src={arrow} alt='Arrow' />
-              </div>
             </div>
 
-            {marketplaceState &&
               <div className={styles.checked}>
                 <div className={styles.typeContainer}>
                   <div className={styles.type}>
-                    Tipo de produto
+                    Mídia
                   </div>
 
                   <div className={styles.type}>
-                    Tipo de produto
-                  </div>
-
-                  <div className={styles.type}>
-                    Tipo de produto
+                    Marketing
                   </div>
                 </div>
               </div>
-            }
+            
           </div>
 
-          <div className={styles.option} onClick={() => window.location.pathname == '/points' ? null : window.location.pathname == '/profile' ? null : window.open('/points', '_self')}>
+          <div className={styles.option}>
             <div className={styles.notChecked}>
               <div className={styles.icon}>
                 <Image src={dashboardicon} alt='Icon' />
@@ -81,12 +73,9 @@ const UserSidebar = () => {
                 Dashboard
               </div>
 
-              <div className={styles.arrow}>
-                <Image src={arrow} alt='Arrow' />
-              </div>
+             
             </div>
 
-            {dashboardState &&
               <div className={styles.checked}>
                 <div className={styles.typeContainer}>
                   <div className={styles.type} onClick={() => window.location.pathname == '/profile' ? null : window.open('/profile', '_self')}>
@@ -98,10 +87,10 @@ const UserSidebar = () => {
                   </div>
                 </div>
               </div>
-            }
+          
           </div>
 
-          <div className={styles.option} onClick={() => window.location.pathname == '/salespanel' ? null : window.location.pathname == '/usermanagement' ? null : window.location.pathname == '/productmanagement' ? null : window.open('/salespanel', '_self')}>
+          <div className={styles.option}>
             <div className={styles.notChecked}>
               <div className={styles.icon}>
                 <Image src={adminicon} alt='Icon' />
@@ -110,13 +99,8 @@ const UserSidebar = () => {
               <div className={styles.text}>
                 Administração
               </div>
-
-              <div className={styles.arrow}>
-                <Image src={arrow} alt='Arrow' />
-              </div>
             </div>
 
-            {adminState && (
               <div className={styles.checked}>
                 <div className={styles.typeContainer}>
                   <div className={styles.type} onClick={() => webPath === '/salespanel' ? null : window.open('/salespanel', '_self')}>
@@ -136,7 +120,6 @@ const UserSidebar = () => {
                   </div>
                 </div>
               </div>
-            )}
           </div>
         </div>
 

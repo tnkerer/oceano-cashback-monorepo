@@ -55,7 +55,8 @@
         }
 
         .wallet {
-          width: 290px;
+          width: fit-content;
+          min-width: 290px;
           display: flex;
           align-items: center;
           padding: 20px;
